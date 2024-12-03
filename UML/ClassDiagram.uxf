@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>156</x>
-      <y>78</y>
+      <x>132</x>
+      <y>204</y>
       <w>126</w>
       <h>72</h>
     </coordinates>
@@ -22,8 +22,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>474</x>
-      <y>60</y>
+      <x>414</x>
+      <y>192</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
@@ -42,73 +42,83 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>162</x>
-      <y>246</y>
-      <w>126</w>
+      <x>138</x>
+      <y>378</y>
+      <w>168</w>
       <h>114</h>
     </coordinates>
     <panel_attributes>DipendentiDB
 --
+_-istanzaDipendente:DipendenteDB_
 +dipendenti:hashMap&lt;String,Dipendente&gt;
++osservatori:LinkedList&lt;Observer&gt;
 --
-+addUtente(Dipendente)
-+removeUtente(String)</panel_attributes>
++DipendenteDB()
++getIstance():DipendenteDB
++add(E)
++obtain(String)
++remove
++attach(:Observer)
++detach(:Obsserver)
+notify</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>198</x>
-      <y>144</y>
+      <x>174</x>
+      <y>270</y>
       <w>18</w>
-      <h>114</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>246</y>
+      <x>420</x>
+      <y>378</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
     <panel_attributes>RuoloDb
 --
+_-istanzaRuolo:RuoloDB_
 +ruoli:hashMAp&lt;String,ruoli&gt;
++osservatori:LinkedList&lt;Observer&gt;
 --
-+addRuolo(Ruolo)
-+removeRuolo(String)
++RuoloeDB()
++getIstance():RuoloDB
++add(E)
++obtain(String)
++remove
++attach(:Observer)
++detach(:Obsserver)
+notify
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>534</x>
-      <y>168</y>
+      <x>462</x>
+      <y>300</y>
       <w>18</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>486</x>
-      <y>402</y>
+      <x>672</x>
+      <y>588</y>
       <w>84</w>
-      <h>114</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Aggiunta pattern 
-singleton per
-assicurarmi che
-ci sia un'unica 
-istanza di queste 
-classi
-+ pattern observer
+    <panel_attributes>pattern observer
 per notificare 
 eventuali modifiche
 dei componenti  
@@ -116,34 +126,12 @@ bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>282</x>
-      <y>288</y>
-      <w>216</w>
-      <h>192</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;300.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>522</x>
-      <y>354</y>
-      <w>18</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>780</x>
-      <y>60</y>
+      <x>720</x>
+      <y>198</y>
       <w>126</w>
-      <h>114</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>Unita
 --
@@ -153,14 +141,19 @@ bg=blue</panel_attributes>
 --
 +Unita(String)
 +getUnita()
-</panel_attributes>
++addRuolo(Ruolo)
++removeRuolo(Ruolo)
++getRuoli()LinkedList&lt;Ruolo&gt;
++addDipendente(Dipendente,Ruolo)
+removeDipendente(Dipendente,Ruolo)
++getDipendenti(Ruolo)LinkedList&lt;Dipendenti&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>660</x>
-      <y>78</y>
+      <x>552</x>
+      <y>6</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -173,77 +166,311 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>708</x>
-      <y>114</y>
-      <w>84</w>
-      <h>48</h>
+      <x>630</x>
+      <y>30</y>
+      <w>204</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>120.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>320.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>786</x>
-      <y>252</y>
+      <x>726</x>
+      <y>384</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
     <panel_attributes>UnitaDb
 --
+_-istanzaUnita:UnitaDB_
 +unita:hashMap&lt;String,Unità&gt;
++osservatori:LinkedList&lt;Observer&gt;
 --
-+addunnità
++UnitaDB()
++getIstance():UnitaDB
++add(E)
++obtain(String)
 +remove
++attach(:Observer)
++detach(:Obsserver)
+notify
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>828</x>
-      <y>168</y>
+      <x>762</x>
+      <y>324</y>
       <w>18</w>
-      <h>96</h>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>348</y>
-      <w>228</w>
-      <h>108</h>
+      <x>252</x>
+      <y>228</y>
+      <w>174</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+m2=1</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>534</x>
+      <y>282</y>
+      <w>198</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+m2=1</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>0</x>
+      <y>462</y>
+      <w>84</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>applico il pattern
+singleton poichè 
+per queste classi
+che mi fungono da 
+database quando
+leggo o scrivo da 
+file, ho bisogno di
+un'unica istanza 
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>78</x>
+      <y>432</y>
+      <w>72</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>360.0;10.0;10.0;160.0</additional_attributes>
+    <additional_attributes>10.0;90.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>822</x>
+      <y>0</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+UnitaComponent
+--
++Unita(String)
++getUnita()
++addRuolo(Ruolo)
++removeRuolo(Ruolo)
++getRuoli()LinkedList&lt;Ruolo&gt;
++addDipendente(Dipendente,Ruolo)
+removeDipendente(Dipendente,Ruolo)
++getDipendenti(Ruolo)LinkedList&lt;Dipendenti&gt;</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>276</x>
-      <y>96</y>
-      <w>210</w>
-      <h>30</h>
+      <x>666</x>
+      <y>72</y>
+      <w>168</w>
+      <h>168</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..n
-m2=1</panel_attributes>
-    <additional_attributes>330.0;10.0;10.0;20.0</additional_attributes>
+    <panel_attributes>cildren
+lt=&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>90.0;260.0;10.0;260.0;10.0;10.0;260.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>594</x>
-      <y>144</y>
-      <w>198</w>
-      <h>30</h>
+      <x>762</x>
+      <y>108</y>
+      <w>126</w>
+      <h>102</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..n
-m2=1</panel_attributes>
-    <additional_attributes>310.0;10.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>190.0;10.0;190.0;80.0;10.0;80.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>108</y>
+      <w>96</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;140.0;80.0;140.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>198</y>
+      <w>126</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>UnitaFoglia
+--
+-nome:String
+-sottoUnità:LinkedList&lt;Untia&gt;
+-ruoli:LinkedList&lt;Ruolo&gt;
+--
++Unita(String)
++getUnita()
++addRuolo(Ruolo)
++removeRuolo(Ruolo)
++getRuoli()LinkedList&lt;Ruolo&gt;
++addDipendente(Dipendente,Ruolo)
+removeDipendente(Dipendente,Ruolo)
++getDipendenti(Ruolo)LinkedList&lt;Dipendenti&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>564</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+DB
+--
++add(E)
++obtain(String)
++remove
++attach(:Observer)
++detach(:Obsserver)
+notify</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>66</x>
+      <y>180</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>606</y>
+      <w>138</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>258</x>
+      <y>486</y>
+      <w>234</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>370.0;130.0;370.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>492</y>
+      <w>324</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;70.0;520.0;70.0;520.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>486</y>
+      <w>18</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>570</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Observer
+--
+upgrade()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>606</y>
+      <w>126</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+observers</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>678</y>
+      <w>18</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>186</x>
+      <y>738</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>ObserverConcreto
+--
+
+--
++aggiorna()</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
