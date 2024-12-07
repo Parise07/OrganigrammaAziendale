@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>132</x>
-      <y>204</y>
-      <w>126</w>
-      <h>72</h>
+      <x>176</x>
+      <y>272</y>
+      <w>168</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>	Dipendente
 --
@@ -22,10 +22,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>414</x>
-      <y>192</y>
-      <w>126</w>
-      <h>114</h>
+      <x>552</x>
+      <y>256</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>Ruolo	
 --
@@ -42,10 +42,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>138</x>
-      <y>378</y>
-      <w>168</w>
-      <h>114</h>
+      <x>184</x>
+      <y>504</y>
+      <w>224</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>DipendentiDB
 --
@@ -66,21 +66,21 @@ notify</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>174</x>
-      <y>270</y>
-      <w>18</w>
-      <h>120</h>
+      <x>232</x>
+      <y>360</y>
+      <w>24</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>378</y>
-      <w>126</w>
-      <h>114</h>
+      <x>560</x>
+      <y>504</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>RuoloDb
 --
@@ -102,21 +102,21 @@ notify
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>462</x>
-      <y>300</y>
-      <w>18</w>
-      <h>90</h>
+      <x>616</x>
+      <y>400</y>
+      <w>24</w>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>672</x>
-      <y>588</y>
-      <w>84</w>
-      <h>60</h>
+      <x>896</x>
+      <y>784</y>
+      <w>112</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>pattern observer
 per notificare 
@@ -128,10 +128,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
-      <y>198</y>
-      <w>126</w>
-      <h>132</h>
+      <x>960</x>
+      <y>264</y>
+      <w>168</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>Unita
 --
@@ -152,10 +152,10 @@ removeDipendente(Dipendente,Ruolo)
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>552</x>
-      <y>6</y>
-      <w>84</w>
-      <h>42</h>
+      <x>736</x>
+      <y>8</y>
+      <w>112</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>applicare composete
 per la struttra 
@@ -166,10 +166,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>30</y>
-      <w>204</w>
-      <h>18</h>
+      <x>840</x>
+      <y>40</y>
+      <w>272</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>320.0;10.0;10.0;10.0</additional_attributes>
@@ -177,10 +177,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>726</x>
-      <y>384</y>
-      <w>126</w>
-      <h>114</h>
+      <x>968</x>
+      <y>512</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>UnitaDb
 --
@@ -202,21 +202,21 @@ notify
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>762</x>
-      <y>324</y>
-      <w>18</w>
-      <h>72</h>
+      <x>1016</x>
+      <y>432</y>
+      <w>24</w>
+      <h>96</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>228</y>
-      <w>174</w>
-      <h>24</h>
+      <x>336</x>
+      <y>304</y>
+      <w>232</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -226,10 +226,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>534</x>
-      <y>282</y>
-      <w>198</w>
-      <h>24</h>
+      <x>712</x>
+      <y>376</y>
+      <w>264</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -240,9 +240,9 @@ m2=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>0</x>
-      <y>462</y>
-      <w>84</w>
-      <h>84</h>
+      <y>616</y>
+      <w>112</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>applico il pattern
 singleton poichè 
@@ -258,10 +258,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>78</x>
-      <y>432</y>
-      <w>72</w>
-      <h>66</h>
+      <x>104</x>
+      <y>576</y>
+      <w>96</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;90.0;100.0;10.0</additional_attributes>
@@ -269,10 +269,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>822</x>
+      <x>1096</x>
       <y>0</y>
-      <w>126</w>
-      <h>114</h>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 UnitaComponent
@@ -290,10 +290,10 @@ removeDipendente(Dipendente,Ruolo)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>666</x>
-      <y>72</y>
-      <w>168</w>
-      <h>168</h>
+      <x>888</x>
+      <y>96</y>
+      <w>224</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>cildren
 lt=&lt;&lt;&lt;&lt;-&gt;
@@ -303,10 +303,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>762</x>
-      <y>108</y>
-      <w>126</w>
-      <h>102</h>
+      <x>1016</x>
+      <y>144</y>
+      <w>168</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>190.0;10.0;190.0;80.0;10.0;80.0;10.0;150.0</additional_attributes>
@@ -314,10 +314,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>108</y>
-      <w>96</w>
-      <h>102</h>
+      <x>1160</x>
+      <y>144</y>
+      <w>128</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;140.0;80.0;140.0;150.0</additional_attributes>
@@ -325,10 +325,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>876</x>
-      <y>198</y>
-      <w>126</w>
-      <h>138</h>
+      <x>1168</x>
+      <y>264</y>
+      <w>168</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>UnitaFoglia
 --
@@ -350,10 +350,10 @@ removeDipendente(Dipendente,Ruolo)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>426</x>
-      <y>564</y>
-      <w>126</w>
-      <h>114</h>
+      <x>568</x>
+      <y>752</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 DB
@@ -369,21 +369,10 @@ notify</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>66</x>
-      <y>180</y>
-      <w>114</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>546</x>
-      <y>606</y>
-      <w>138</w>
-      <h>18</h>
+      <x>728</x>
+      <y>808</y>
+      <w>184</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
@@ -391,10 +380,10 @@ notify</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>258</x>
-      <y>486</y>
-      <w>234</w>
-      <h>90</h>
+      <x>344</x>
+      <y>648</y>
+      <w>312</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>370.0;130.0;370.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
@@ -402,10 +391,10 @@ notify</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>474</x>
-      <y>492</y>
-      <w>324</w>
-      <h>84</h>
+      <x>632</x>
+      <y>656</y>
+      <w>432</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;120.0;10.0;70.0;520.0;70.0;520.0;10.0</additional_attributes>
@@ -413,10 +402,10 @@ notify</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>474</x>
-      <y>486</y>
-      <w>18</w>
-      <h>90</h>
+      <x>632</x>
+      <y>648</y>
+      <w>24</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
@@ -424,10 +413,10 @@ notify</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>192</x>
-      <y>570</y>
-      <w>126</w>
-      <h>114</h>
+      <x>256</x>
+      <y>760</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 Observer
@@ -438,10 +427,10 @@ upgrade()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>606</y>
-      <w>126</w>
-      <h>24</h>
+      <x>416</x>
+      <y>808</y>
+      <w>168</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 observers</panel_attributes>
@@ -450,10 +439,10 @@ observers</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>678</y>
-      <w>18</w>
-      <h>72</h>
+      <x>320</x>
+      <y>904</y>
+      <w>24</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -461,10 +450,10 @@ observers</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>186</x>
-      <y>738</y>
-      <w>126</w>
-      <h>114</h>
+      <x>248</x>
+      <y>984</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>ObserverConcreto
 --
