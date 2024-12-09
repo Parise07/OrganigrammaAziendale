@@ -3,7 +3,6 @@ package utils;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
-import Exception.RuoloException;
 
 public class Ruolo implements Serializable {
     private String nome;
@@ -17,15 +16,15 @@ public class Ruolo implements Serializable {
     public String getNome() {
         return nome;
     }
-    public void  addDipendente(Dipendente d) throws Exception.RuoloException.RuoloAssegnatoException {
+    public void  addDipendente(Dipendente d) {
         if(dipendenti.containsKey(d.getEmail()))
-            throw new RuoloException.RuoloAssegnatoException(d);
+            throw new IllegalArgumentException("Dipendente già assegnato al ruolo");
         dipendenti.put(d.getEmail(), d);
     }
 
-    public void removeDipendente(Dipendente d)throws Exception.RuoloException.RuoloNonAssegnatoException {
+    public void removeDipendente(Dipendente d){
         if(!dipendenti.containsKey(d.getEmail()))
-            throw new RuoloException.RuoloNonAssegnatoException(d);
+            throw new IllegalArgumentException("Dipendente non presente");
         dipendenti.remove(d.getEmail());
     }
 

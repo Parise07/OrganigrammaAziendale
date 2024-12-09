@@ -4,7 +4,6 @@ import utils.Dipendente;
 import utils.Ruolo;
 import java.util.HashMap;
 import java.util.List;
-import Exception.UnitaException;
 
 
 public class UnitaFoglia implements Unita{
@@ -39,16 +38,16 @@ public class UnitaFoglia implements Unita{
     }
 
     @Override
-    public void addRuolo(Ruolo r) throws Exception.UnitaException.RuoloEsistenteException {
+    public void addRuolo(Ruolo r){
         if(ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloEsistenteException();
+            throw new IllegalArgumentException("Ruolo gia esistente");
         ruoli.put(r.getNome(),r);
     }
 
     @Override
-    public void removeRuolo(Ruolo r) throws Exception.UnitaException.RuoloInesistenteException {
+    public void removeRuolo(Ruolo r){
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("Ruolo non trovato");
         ruoli.remove(r.getNome());
     }
 
@@ -58,23 +57,24 @@ public class UnitaFoglia implements Unita{
     }
 
     @Override
-    public void addDipendente(Dipendente d, Ruolo r) throws Exception.UnitaException.RuoloEsistenteException, Exception.RuoloException.RuoloAssegnatoException {
-        if(ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloEsistenteException();
+    public void addDipendente(Dipendente d, Ruolo r) {
+        if(!ruoli.containsKey(r.getNome()) ) {
+            throw new IllegalArgumentException("Ruolo non trovato");
+        }
         r.addDipendente(d);
     }
 
     @Override
-    public void removeDipendente(Dipendente d, Ruolo r) throws Exception.UnitaException.RuoloInesistenteException, Exception.RuoloException.RuoloNonAssegnatoException {
+    public void removeDipendente(Dipendente d, Ruolo r) {
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("ruolo non trovato");
         r.removeDipendente(d);
     }
 
     @Override
-    public HashMap<String, Dipendente> getDipendenti(Ruolo r) throws Exception.UnitaException.RuoloInesistenteException {
+    public HashMap<String, Dipendente> getDipendenti(Ruolo r){
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("ruolo non trovato");
         return r.getDipendenti();
     }
 }

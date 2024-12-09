@@ -6,7 +6,6 @@ import utils.Ruolo;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import Exception.UnitaException;
 
 public class UnitaComposite implements Unita {
     private String nome;
@@ -32,16 +31,16 @@ public class UnitaComposite implements Unita {
     }
 
 
-    public void addSottoUnita(Unita u) throws Exception.UnitaException.SottoUnitaEsistenteException {
+
+    public void addSottoUnita(Unita u) {
         if(sottoUnita.contains(u))
-            throw new UnitaException.SottoUnitaEsistenteException();
+            throw new IllegalArgumentException("Sotto unità già presente");
         sottoUnita.add(u);
     }
 
-
-    public void remoeSottoUnita(Unita u) throws Exception.UnitaException.SottoUnitaInesistenteException {
-        if(sottoUnita.contains(u))
-            throw new UnitaException.SottoUnitaInesistenteException();
+    public void removeSottoUnita(Unita u){
+        if(!sottoUnita.contains(u))
+            throw new IllegalArgumentException("Sotto unità non presente");
         sottoUnita.remove(u);
     }
 
@@ -56,16 +55,16 @@ public class UnitaComposite implements Unita {
     }
 
     @Override
-    public void addRuolo(Ruolo r) throws Exception.UnitaException.RuoloEsistenteException {
+    public void addRuolo(Ruolo r){
         if(ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloEsistenteException();
+            throw new IllegalArgumentException("Ruolo gia esistente ");
         ruoli.put(r.getNome(),r);
     }
 
     @Override
-    public void removeRuolo(Ruolo r) throws Exception.UnitaException.RuoloInesistenteException {
+    public void removeRuolo(Ruolo r) {
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("Impossibile rimuovere il ruolo");
         ruoli.remove(r.getNome());
     }
 
@@ -75,23 +74,23 @@ public class UnitaComposite implements Unita {
     }
 
     @Override
-    public void addDipendente(Dipendente d, Ruolo r) throws Exception.UnitaException.RuoloEsistenteException, Exception.RuoloException.RuoloAssegnatoException {
-        if(ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloEsistenteException();
+    public void addDipendente(Dipendente d, Ruolo r) {
+        if(!ruoli.containsKey(r.getNome()))
+            throw new IllegalArgumentException("Impossibile aggiungere il dipendente ruolo non trovato");
         r.addDipendente(d);
     }
 
     @Override
-    public void removeDipendente(Dipendente d, Ruolo r) throws Exception.UnitaException.RuoloInesistenteException, Exception.RuoloException.RuoloNonAssegnatoException {
+    public void removeDipendente(Dipendente d, Ruolo r) {
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("Ruolo non trovato impossibile rimuover dipendente");
         r.removeDipendente(d);
     }
 
     @Override
-    public HashMap<String, Dipendente> getDipendenti(Ruolo r) throws Exception.UnitaException.RuoloInesistenteException {
+    public HashMap<String, Dipendente> getDipendenti(Ruolo r) {
         if(!ruoli.containsKey(r.getNome()))
-            throw new UnitaException.RuoloInesistenteException();
+            throw new IllegalArgumentException("Ruolo non Trovato");
         return r.getDipendenti();
     }
 }
