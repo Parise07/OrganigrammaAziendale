@@ -497,4 +497,25 @@ style=wordwrap</panel_attributes>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0;40.0;40.0;40.0;10.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>714</x>
+      <y>861</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Organigramma
+--
+-radice:Unita
+--
++getRadice()
++getOrganigramma()
++getRuoli(Unita)
++getDipendenti(Ruolo)
++aggiornaDipendenti()
++aggiornaUnita()
++aggiornaRuoli()</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>

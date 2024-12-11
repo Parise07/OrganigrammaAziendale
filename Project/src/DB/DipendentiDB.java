@@ -10,7 +10,7 @@ public class DipendentiDB implements DB<Dipendente>{
     private static DipendentiDB dipendentiDB;
     private HashMap<String,Dipendente>dipendenti=new HashMap<>();
     private LinkedList<Observer> osservatori = new LinkedList<>();
-
+    private File file;
     private DipendentiDB(){}
 
     public static DipendentiDB getInstance(){ //pattern Singleton
@@ -19,13 +19,15 @@ public class DipendentiDB implements DB<Dipendente>{
         }
         return dipendentiDB;
     }
+
+
     @Override
     public void add(Dipendente dipendente) {
         if(dipendenti.containsKey(dipendente.getEmail())){
             throw new IllegalArgumentException("Dipendente già presente nel DB");
         }
         dipendenti.put(dipendente.getEmail(),dipendente);
-        notify();
+        notifica();
     }
 
     @Override
@@ -34,7 +36,7 @@ public class DipendentiDB implements DB<Dipendente>{
             throw new IllegalArgumentException("Dipendente non presente nel DB. IMPOSSIBILE modificare");
         }
         dipendenti.put(dipendente.getEmail(),dipendente);
-        notify();
+        notifica();
     }
 
     @Override
@@ -43,12 +45,23 @@ public class DipendentiDB implements DB<Dipendente>{
     }
 
     @Override
+    public void salva() {
+        file.setDipendneti(dipendenti,osservatori);
+    }
+
+    @Override
+    public void carica() {
+        this.osservatori=file.getObserverDipendenti();
+        this.dipendenti=file.getMapDipendenti();
+    }
+
+    @Override
     public void remove(Dipendente dipendente) {
         if(!dipendenti.containsKey(dipendente.getEmail())){
             throw new IllegalArgumentException("Dipendente non presente nel DB");
         }
         dipendenti.remove(dipendente.getEmail());
-        notify();
+        notifica();
     }
 
     @Override

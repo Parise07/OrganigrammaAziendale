@@ -10,7 +10,7 @@ public class RuoloDB implements DB<Ruolo>{
     private static RuoloDB ruoloDB;
     private HashMap<String,Ruolo>ruoli= new HashMap<>();
     private LinkedList<Observer> osservatori= new LinkedList<>();
-
+    private File file;
     private RuoloDB(){}
 
     public static RuoloDB getInstance(){ //pattern Singleton
@@ -26,7 +26,7 @@ public class RuoloDB implements DB<Ruolo>{
             throw new IllegalArgumentException("Ruolo già presente nel DB");
         }
         ruoli.put(ruolo.getNome(),ruolo);
-        notify();
+        notifica();
     }
 
     @Override
@@ -35,12 +35,24 @@ public class RuoloDB implements DB<Ruolo>{
             throw new IllegalArgumentException("Ruolo già presente nel DB. IMPOSSIBILE modificare");
         }
         ruoli.put(ruolo.getNome(),ruolo);
-        notify();
+        notifica();
     }
 
     @Override
     public Ruolo get(String nome) {
         return ruoli.get(nome);
+    }
+
+
+    @Override
+    public void salva() {
+        file.setRuolo(ruoli,osservatori);
+    }
+
+    @Override
+    public void carica() {
+        this.osservatori=file.getObserverDipendenti();
+        this.ruoli=file.getMapRuoli();
     }
 
     @Override
@@ -49,7 +61,7 @@ public class RuoloDB implements DB<Ruolo>{
             throw new IllegalArgumentException("Ruolo non presente nel DB");
         }
         ruoli.remove(ruolo.getNome());
-        notify();
+        notifica();
     }
 
     @Override

@@ -12,6 +12,8 @@ public class UnitaDB implements DB<Unita>{
     private static UnitaDB unitaDB;
     private HashMap<String,Unita> unita= new HashMap<>();
     private LinkedList<Observer>osservatori= new LinkedList<>();
+    private Unita radice;
+    private File file;
 
     private UnitaDB(){}
 
@@ -22,13 +24,24 @@ public class UnitaDB implements DB<Unita>{
         return unitaDB;
     }
 
+    public Unita getRadice(){
+        return radice;
+    }
+
+    public void setRadice(Unita u){
+        if(radice==null)
+            this.radice=u;
+        throw new IllegalArgumentException("Radice già esistente");
+    }
+
+
     @Override
     public void add(Unita u) {
         if(unita.containsKey(u.getNome())){
             throw new IllegalArgumentException("Unita già presente nel DB");
         }
         unita.put(u.getNome(),u);
-        notify();
+        notifica();
     }
 
     @Override
@@ -37,7 +50,7 @@ public class UnitaDB implements DB<Unita>{
             throw new IllegalArgumentException("Unita già presente nel DB");
         }
         unita.put(u.getNome(),u);
-        notify();
+        notifica();
     }
 
     @Override
@@ -46,12 +59,23 @@ public class UnitaDB implements DB<Unita>{
     }
 
     @Override
+    public void salva() {
+        file.setUnita(unita,osservatori,radice);
+    }
+
+    @Override
+    public void carica() {
+        this.osservatori=file.getObserverDipendenti();
+        this.unita=file.getMapUnita();
+        this.radice=file.getRadice();
+    }
+    @Override
     public void remove(Unita u) {
         if(!unita.containsKey(u.getNome())){
             throw new IllegalArgumentException("Unita non presente nel DB");
         }
         unita.remove(u.getNome());
-        notify();
+        notifica();
     }
 
     @Override
