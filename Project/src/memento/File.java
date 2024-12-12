@@ -1,10 +1,9 @@
-package DB;
+package memento;
 
 import composite.Unita;
 import observer.Observer;
 import utils.Dipendente;
 import utils.Ruolo;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -12,20 +11,20 @@ import java.util.LinkedList;
 public class File implements Serializable {
     private static final long serialVersionUID = 1L;
     private HashMap<String, Unita>mapUnita;
-    private LinkedList<Observer>ObserverUnita;
+    private LinkedList<Observer>observerUnita;
     private HashMap<String, Ruolo>mapRuoli;
-    private LinkedList<Observer>ObserverRuoli;
+    private LinkedList<Observer>observerRuoli;
     private HashMap<String, Dipendente>mapDipendenti;
-    private LinkedList<Observer>ObserverDipendenti;
+    private LinkedList<Observer>observerDipendenti;
     private Unita radice;
 
     public File(File file){
         mapUnita = file.getMapUnita();
         mapRuoli = file.getMapRuoli();
         mapDipendenti = file.getMapDipendenti();
-        ObserverUnita = file.getObserverUnita();
-        ObserverRuoli = file.getObserverRuoli();
-        ObserverDipendenti = file.getObserverDipendenti();
+        observerUnita = file.getObserverUnita();
+        observerRuoli = file.getObserverRuoli();
+        observerDipendenti = file.getObserverDipendenti();
         radice=file.getRadice();
     }
 
@@ -35,28 +34,28 @@ public class File implements Serializable {
     }
     public void setUnita(HashMap<String, Unita> mapUnita,LinkedList<Observer>ObserverUnita,Unita radice) {
         this.mapUnita = mapUnita;
-        this.ObserverUnita = ObserverUnita;
+        this.observerUnita = ObserverUnita;
         this.radice=radice;
     }
 
     public void setRuolo(HashMap<String, Ruolo> mapRuoli,LinkedList<Observer>ObserverRuolo) {
         this.mapRuoli = mapRuoli;
-        this.ObserverRuoli = ObserverRuolo;
+        this.observerRuoli = ObserverRuolo;
     }
 
     public void setDipendneti(HashMap<String, Dipendente> mapDipendenti,LinkedList<Observer>ObserverDipendenti) {
         this.mapDipendenti = mapDipendenti;
-        this.ObserverDipendenti = ObserverDipendenti;
+        this.observerDipendenti = ObserverDipendenti;
     }
 
     public LinkedList<Observer> getObserverUnita() {
-        return ObserverUnita;
+        return observerUnita;
     }
     public LinkedList<Observer> getObserverRuoli() {
-        return ObserverRuoli;
+        return observerRuoli;
     }
     public LinkedList<Observer> getObserverDipendenti() {
-        return ObserverDipendenti;
+        return observerDipendenti;
     }
     public HashMap<String, Ruolo> getMapRuoli() {
         return mapRuoli;

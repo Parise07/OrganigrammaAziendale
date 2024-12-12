@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 public interface DB<E> extends Serializable {
     void add(E e);
-    void modifica(E e);
     E get(String nome);
     void salva();
     void carica();

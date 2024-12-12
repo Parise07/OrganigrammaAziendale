@@ -1,5 +1,6 @@
 package DB;
 
+import memento.File;
 import observer.Observer;
 import utils.Dipendente;
 
@@ -23,18 +24,6 @@ public class DipendentiDB implements DB<Dipendente>{
 
     @Override
     public void add(Dipendente dipendente) {
-        if(dipendenti.containsKey(dipendente.getEmail())){
-            throw new IllegalArgumentException("Dipendente già presente nel DB");
-        }
-        dipendenti.put(dipendente.getEmail(),dipendente);
-        notifica();
-    }
-
-    @Override
-    public void modifica(Dipendente dipendente) {
-        if(!dipendenti.containsKey(dipendente.getEmail())){
-            throw new IllegalArgumentException("Dipendente non presente nel DB. IMPOSSIBILE modificare");
-        }
         dipendenti.put(dipendente.getEmail(),dipendente);
         notifica();
     }

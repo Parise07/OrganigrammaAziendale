@@ -33,8 +33,6 @@ public class UnitaComposite implements Unita {
 
 
     public void addSottoUnita(Unita u) {
-        if(sottoUnita.contains(u))
-            throw new IllegalArgumentException("Sotto unità già presente");
         sottoUnita.add(u);
     }
 
@@ -56,8 +54,6 @@ public class UnitaComposite implements Unita {
 
     @Override
     public void addRuolo(Ruolo r){
-        if(ruoli.containsKey(r.getNome()))
-            throw new IllegalArgumentException("Ruolo gia esistente ");
         ruoli.put(r.getNome(),r);
     }
 

@@ -39,8 +39,6 @@ public class UnitaFoglia implements Unita{
 
     @Override
     public void addRuolo(Ruolo r){
-        if(ruoli.containsKey(r.getNome()))
-            throw new IllegalArgumentException("Ruolo gia esistente");
         ruoli.put(r.getNome(),r);
     }
 
@@ -58,9 +56,6 @@ public class UnitaFoglia implements Unita{
 
     @Override
     public void addDipendente(Dipendente d, Ruolo r) {
-        if(!ruoli.containsKey(r.getNome()) ) {
-            throw new IllegalArgumentException("Ruolo non trovato");
-        }
         r.addDipendente(d);
     }
 

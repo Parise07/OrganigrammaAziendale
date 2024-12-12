@@ -1,6 +1,8 @@
 package DB;
 
 import composite.Unita;
+import composite.UnitaComposite;
+import memento.File;
 import observer.Observer;
 
 import java.util.HashMap;
@@ -31,27 +33,16 @@ public class UnitaDB implements DB<Unita>{
     public void setRadice(Unita u){
         if(radice==null)
             this.radice=u;
-        throw new IllegalArgumentException("Radice già esistente");
+        this.add(u);
     }
 
 
     @Override
     public void add(Unita u) {
-        if(unita.containsKey(u.getNome())){
-            throw new IllegalArgumentException("Unita già presente nel DB");
-        }
         unita.put(u.getNome(),u);
         notifica();
     }
 
-    @Override
-    public void modifica(Unita u) {
-        if(unita.containsKey(u.getNome())){
-            throw new IllegalArgumentException("Unita già presente nel DB");
-        }
-        unita.put(u.getNome(),u);
-        notifica();
-    }
 
     @Override
     public Unita get(String nome) {
@@ -74,6 +65,14 @@ public class UnitaDB implements DB<Unita>{
         if(!unita.containsKey(u.getNome())){
             throw new IllegalArgumentException("Unita non presente nel DB");
         }
+        Unita padre= unita.get(u.getPadre());
+        if(!u.getSottoUnita().isEmpty()){
+            UnitaComposite padre1=(UnitaComposite)padre;
+            for(Unita i: u.getSottoUnita()){
+                padre1.addSottoUnita(i);
+            }
+        }
+        padre.getSottoUnita().remove(u);
         unita.remove(u.getNome());
         notifica();
     }

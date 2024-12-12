@@ -1,5 +1,6 @@
 package DB;
 
+import memento.File;
 import observer.Observer;
 import utils.Ruolo;
 
@@ -22,21 +23,10 @@ public class RuoloDB implements DB<Ruolo>{
 
     @Override
     public void add(Ruolo ruolo) {
-        if(ruoli.containsKey(ruolo.getNome())){
-            throw new IllegalArgumentException("Ruolo già presente nel DB");
-        }
         ruoli.put(ruolo.getNome(),ruolo);
         notifica();
     }
 
-    @Override
-    public void modifica(Ruolo ruolo) {
-        if(!ruoli.containsKey(ruolo.getNome())){
-            throw new IllegalArgumentException("Ruolo già presente nel DB. IMPOSSIBILE modificare");
-        }
-        ruoli.put(ruolo.getNome(),ruolo);
-        notifica();
-    }
 
     @Override
     public Ruolo get(String nome) {
