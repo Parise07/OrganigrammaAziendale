@@ -35,7 +35,7 @@ public class DipendentiDB implements DB<Dipendente>{
 
     @Override
     public void salva() {
-        file.setDipendneti(dipendenti,osservatori);
+        file.setDipendenti(dipendenti,osservatori);
     }
 
     @Override

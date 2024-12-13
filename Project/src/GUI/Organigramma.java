@@ -1,13 +1,17 @@
 package GUI;
 
 import DB.DipendentiDB;
+import memento.Caretaker;
 import memento.File;
 import DB.RuoloDB;
 import DB.UnitaDB;
 import composite.Unita;
+import memento.Memento;
 import utils.Dipendente;
 import utils.Ruolo;
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Organigramma implements Serializable {
@@ -15,6 +19,7 @@ public class Organigramma implements Serializable {
     private RuoloDB ruoli=RuoloDB.getInstance();
     private DipendentiDB dipendenti=DipendentiDB.getInstance();
     private File file;
+    private Caretaker c;
 
     public Organigramma(Unita u) {
         unita.setRadice(u);
@@ -24,11 +29,26 @@ public class Organigramma implements Serializable {
         return unita.getRadice();
     }
 
-    //TODO nei metodi aggiungi e remove c'è un problema di logica
-    //TODO per la modifica modificare i metodi add dei singoli non lanciare eccezione
-    // ma usare put come anche aggiornamento essendo che lo permette
     //TODO stampa dell'organigramma in maniera ricorsiva e modificare aggiungi e modifica mettendoli in una classe separata
+    public void stampaOrganigramma(){
+        stampaOrganigrammaRicorsivo(this.getRadice(),0);
+    }
 
+    private void stampaOrganigrammaRicorsivo(Unita unita, int livello) {
+        List<Unita> sottounita=  unita.getSottoUnita();
+        if(unita.getSottoUnita()==null){
+            return;
+        }
+        livello++;
+        for(Unita u: sottounita)
+            stampaOrganigrammaRicorsivo(u,livello);
+    }
+    /*
+    livello non mi serve averlo poichè la stampa dei sottolivell di ogni
+    sottunità avviene in contemporanea e stampa organigramma me la rixhiamo nella
+    gui ogni volta che faccio la chiamata stamp un unità e la grafico tramite
+    grafica unità
+     */
 
     public void aggiungiDipendente(Dipendente d,Unita u, Ruolo r){
         u.addDipendente(d,r);
@@ -58,11 +78,8 @@ public class Organigramma implements Serializable {
     public void salvaOrganigramma(String pathFile){
         ObjectOutputStream oo;
         try{
-            unita.salva();
-            ruoli.salva();
-            dipendenti.salva();
             oo=new ObjectOutputStream(new FileOutputStream(pathFile));
-            oo.writeObject(file);
+            oo.writeObject(c.ripristina());
             oo.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -74,9 +91,7 @@ public class Organigramma implements Serializable {
             oi=new ObjectInputStream(new FileInputStream(pathFile));
             file= new File((File)oi.readObject());
             oi.close();
-            unita.carica();
-            ruoli.carica();
-            dipendenti.carica();
+
         }catch(Exception e){
             e.printStackTrace();
         }

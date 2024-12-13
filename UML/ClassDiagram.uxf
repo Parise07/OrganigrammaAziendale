@@ -1,118 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1.0">
-  <zoom_level>7</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>154</x>
-      <y>238</y>
-      <w>147</w>
-      <h>84</h>
+      <x>130</x>
+      <y>340</y>
+      <w>360</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>	Dipendente
 --
 -nome:String
 -cognome:String
+-email:String
 --
-+Dipendente(String nome,String cognome):Dipendente
++Dipendente(nome:String,cognome:String,email:String)
 +getNome():String
-+getCognome():String</panel_attributes>
++getCognome():String
++toString():String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>224</y>
-      <w>189</w>
-      <h>133</h>
+      <x>640</x>
+      <y>320</y>
+      <w>330</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Ruolo	
 --
 -nome:String
--ListaDipendenti:HashMap&lt;String,Dipendente&gt;
+-dipendenti:HashMap&lt;String,Dipendente&gt;
 --
-+Ruolo(String nome)
++Ruolo(nome:String)
 +getNome():String
-+addDipendente(Dipendente)
-+removeDipendente(Dipendente)
-+getDipendenti()LinkedList&lt;Dipendente&gt;
++addDipendente(d:Dipendente)
++removeDipendente(d:Dipendente)
++getDipendenti()HashMap&lt;String,Dipendente&gt;
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>161</x>
-      <y>399</y>
-      <w>231</w>
-      <h>182</h>
+      <x>240</x>
+      <y>570</y>
+      <w>330</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>DipendentiDB
 --
 _-istanzaDipendente:DipendenteDB_
-+dipendenti:hashMap&lt;String,Dipendente&gt;
-+osservatori:LinkedList&lt;Observer&gt;
+-dipendenti:hashMap&lt;String,Dipendente&gt;
+-osservatori:LinkedList&lt;Observer&gt;
+-file:File
 --
 +DipendenteDB()
 +getIstance():DipendenteDB
-+add(E)
-+modifica(:E)
-+obtain(String)
-+remove(E)
-+carica(:HashMap&lt;E&gt;,LinkedList&lt;Observer&gt;)
++add(d:Dipendente)
++get(nome:String)Dipendente
++remove(d:Dipendente)
++carica()
 +salva()
-+attach(:Observer)
-+detach(:Obsserver)
-+notify()</panel_attributes>
++attach(o:Observer)
++detach(o:Obsserver)
++notifica()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>203</x>
-      <y>315</y>
-      <w>21</w>
-      <h>98</h>
+      <x>300</x>
+      <y>460</y>
+      <w>30</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>420</y>
-      <w>203</w>
-      <h>182</h>
+      <x>710</x>
+      <y>600</y>
+      <w>290</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>RuoloDb
 --
 _-istanzaRuolo:RuoloDB_
-+ruoli:hashMAp&lt;String,ruoli&gt;
-+osservatori:LinkedList&lt;Observer&gt;
+-ruoli:hashMAp&lt;String,ruoli&gt;
+-osservatori:LinkedList&lt;Observer&gt;
+-file:File
 --
 +RuoloeDB()
 +getIstance():RuoloDB
-+add(E)
-+modifica(:E)
-+obtain(String)
-+remove(E)
-+carica(:HashMap&lt;E&gt;,LinkedList&lt;Observer&gt;)
++add(r:Ruolo)
++get(nome:String):Ruolo
++remove(r:Ruolo)
++carica()
 +salva()
-+attach(:Observer)
-+detach(:Obsserver)
-notify()
++attach(o:Observer)
++detach(o:Obsserver)
++notifica()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>350</y>
-      <w>21</w>
-      <h>84</h>
+      <x>780</x>
+      <y>500</y>
+      <w>30</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
@@ -120,10 +122,10 @@ notify()
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>763</x>
-      <y>686</y>
-      <w>133</w>
-      <h>70</h>
+      <x>1100</x>
+      <y>980</y>
+      <w>190</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>pattern observer
 per notificare 
@@ -135,39 +137,40 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>791</x>
-      <y>189</y>
-      <w>210</w>
-      <h>210</h>
+      <x>1140</x>
+      <y>270</y>
+      <w>360</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>UnitaComposite
 --
 -nome:String
 -padre:Unita
--sottoUnità:LinkedList&lt;Untia&gt;
--ruoli:LinkedList&lt;Ruolo&gt;
+-sottoUnità:LinkedList&lt;Unita&gt;
+-ruoli:HashMap&lt;String,Ruolo&gt;
 --
++UnitaCoposite(nome:String,padre:Unita)
 +getNome():String
-+getSottoUnita(Unita):LinkedList&lt;Unita&gt;
-+removeSottoUnita(Unita)
-+addSottoUnita(Unita)
++getSottoUnita(U:Unita):LinkedList&lt;Unita&gt;
++removeSottoUnita(u:Unita)
++addSottoUnita(u:Unita)
 +getPadre()
-+setPadre(Unita)
-+addRuolo(Ruolo)
-+removeRuolo(Ruolo)
++setPadre(u:Unita)
++addRuolo(r:Ruolo)
++removeRuolo(r:Ruolo)
 +getRuoli()HashMap&lt;String,Ruolo&gt;
-+addDipendente(Dipendente,Ruolo)
-+removeDipendente(Dipendente,Ruolo)
-+getDipendenti(Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
++addDipendente(d:Dipendente,r:Ruolo)
++removeDipendente(d:Dipendente,r:Ruolo)
++getDipendenti(r:Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>644</x>
-      <y>7</y>
-      <w>98</w>
-      <h>49</h>
+      <x>930</x>
+      <y>10</y>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>applicare composete
 per la struttra 
@@ -178,10 +181,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>35</y>
-      <w>238</w>
-      <h>21</h>
+      <x>1060</x>
+      <y>50</y>
+      <w>340</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>320.0;10.0;10.0;10.0</additional_attributes>
@@ -189,62 +192,63 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>847</x>
-      <y>441</y>
-      <w>189</w>
-      <h>168</h>
+      <x>1220</x>
+      <y>620</y>
+      <w>270</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>UnitaDb
 --
 _-istanzaUnita:UnitaDB_
-+unita:hashMap&lt;String,Unità&gt;
-+osservatori:LinkedList&lt;Observer&gt;
+-unita:hashMap&lt;String,Unità&gt;
+-osservatori:LinkedList&lt;Observer&gt;
+-file:File
+-padre:Unita
 --
 +UnitaDB()
 +getIstance():UnitaDB
-+add(E)
-+modifica(:E)
-+obtain(String)
-+remove(E)
-+carica(:HashMap&lt;E&gt;,LinkedList&lt;Observer&gt;)
++add(u:Unita)
++get(nome:String)
++remove(u:Unita)
++carica()
 +salva()
-+attach(:Observer)
-+detach(:Obsserver)
-+notify()
++attach(o:Observer)
++detach(o:Obsserver)
++notifica()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>889</x>
-      <y>392</y>
-      <w>21</w>
-      <h>63</h>
+      <x>1280</x>
+      <y>570</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
-      <y>266</y>
-      <w>203</w>
-      <h>28</h>
+      <x>480</x>
+      <y>380</y>
+      <w>180</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
 m2=1</panel_attributes>
-    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>329</y>
-      <w>140</w>
-      <h>28</h>
+      <x>960</x>
+      <y>470</y>
+      <w>200</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -255,9 +259,9 @@ m2=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>0</x>
-      <y>539</y>
-      <w>98</w>
-      <h>98</h>
+      <y>630</y>
+      <w>140</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>applico il pattern
 singleton poichè 
@@ -273,44 +277,43 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>91</x>
-      <y>462</y>
-      <w>84</w>
-      <h>119</h>
+      <x>130</x>
+      <y>660</y>
+      <w>130</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;150.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>959</x>
+      <x>1380</x>
       <y>0</y>
-      <w>147</w>
-      <h>147</h>
+      <w>360</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Unita
 --
 +getNome():String
-+List&lt;Unita&gt;getSottoUnita()
 +getPadre()
-+setPadre(Unita)
-+addRuolo(Ruolo)
-+removeRuolo(Ruolo)
++setPadre(u:Unita)
++addRuolo(r:Ruolo)
++removeRuolo(r:Ruolo)
 +getRuoli()HashMap&lt;String,Ruolo&gt;
-+addDipendente(Dipendente,Ruolo)
-+removeDipendente(Dipendente,Ruolo)
-+getDipendenti(Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
++addDipendente(d:Dipendente,r:Ruolo)
++removeDipendente(d:Dipendente,r:Ruolo)
++getDipendenti(r:Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>742</x>
-      <y>70</y>
-      <w>231</w>
-      <h>210</h>
+      <x>1070</x>
+      <y>100</y>
+      <w>330</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>cildren
 lt=&lt;&lt;&lt;&lt;-&gt;
@@ -320,10 +323,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>889</x>
-      <y>140</y>
-      <w>147</w>
-      <h>63</h>
+      <x>1280</x>
+      <y>200</y>
+      <w>210</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>190.0;10.0;190.0;60.0;10.0;60.0;10.0;70.0</additional_attributes>
@@ -331,79 +334,81 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1015</x>
-      <y>140</y>
-      <w>112</w>
-      <h>105</h>
+      <x>1460</x>
+      <y>200</y>
+      <w>270</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;140.0;60.0;140.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;250.0;60.0;250.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1022</x>
-      <y>231</y>
-      <w>147</w>
-      <h>175</h>
+      <x>1580</x>
+      <y>330</y>
+      <w>360</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>UnitaFoglia
 --
+-padre:Unita
 -nome:String
 -sottoUnità:LinkedList&lt;Untia&gt;
--ruoli:LinkedList&lt;Ruolo&gt;
+-ruoli:HashMap&lt;String,Ruolo&gt;
 --
++UnitaFoglia(nome:String,padre:Unita)
 +getNome():String
++getSottoUnita(U:Unita):LinkedList&lt;Unita&gt;
 +getPadre()
-+setPadre(Unita)
-+addRuolo(Ruolo)
-+removeRuolo(Ruolo)
++setPadre(u:Unita)
++addRuolo(r:Ruolo)
++removeRuolo(r:Ruolo)
 +getRuoli()HashMap&lt;String,Ruolo&gt;
-+addDipendente(Dipendente,Ruolo)
-+removeDipendente(Dipendente,Ruolo)
-+getDipendenti(Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
++addDipendente(d:Dipendente,r:Ruolo)
++removeDipendente(d:Dipendente,r:Ruolo)
++getDipendenti(r:Ruolo)HashMap&lt;String,Dipendente&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>497</x>
-      <y>658</y>
-      <w>210</w>
-      <h>189</h>
+      <x>720</x>
+      <y>940</y>
+      <w>270</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 DB
 --
-+add(:E)
-+modifica(:E)
-+obtain(:String)
-+remove(:E)
-+carica(:HashMap&lt;E&gt;,LinkedList&lt;Observer&gt;)
++add(e:E)
++get(e:String):E
++remove(e:E)
++carica()
 +salva()
-+attach(:Observer)
-+detach(:Obsserver)
-+notify()</panel_attributes>
++attach(o:Observer)
++detach(o:Obsserver)
++notifica()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
-      <y>707</y>
-      <w>77</w>
-      <h>21</h>
+      <x>980</x>
+      <y>1010</y>
+      <w>140</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>574</y>
-      <w>273</w>
-      <h>98</h>
+      <x>440</x>
+      <y>820</y>
+      <w>390</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>370.0;120.0;370.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
@@ -411,21 +416,21 @@ DB
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
-      <y>602</y>
-      <w>378</w>
-      <h>70</h>
+      <x>800</x>
+      <y>880</y>
+      <w>450</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;30.0;520.0;30.0;520.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0;430.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
-      <y>595</y>
-      <w>21</w>
-      <h>77</h>
+      <x>800</x>
+      <y>850</y>
+      <w>30</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -433,24 +438,24 @@ DB
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>665</y>
-      <w>147</w>
-      <h>133</h>
+      <x>330</x>
+      <y>950</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 Observer
 --
-upgrade()</panel_attributes>
++aggiorna()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>364</x>
-      <y>707</y>
-      <w>147</w>
-      <h>28</h>
+      <x>530</x>
+      <y>1010</y>
+      <w>210</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 observers</panel_attributes>
@@ -459,10 +464,10 @@ observers</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>791</y>
-      <w>21</w>
-      <h>84</h>
+      <x>410</x>
+      <y>1130</y>
+      <w>30</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -470,10 +475,10 @@ observers</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>217</x>
-      <y>861</y>
-      <w>147</w>
-      <h>133</h>
+      <x>320</x>
+      <y>1230</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>ObserverConcreto
 --
@@ -485,21 +490,21 @@ observers</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>651</y>
-      <w>56</w>
-      <h>49</h>
+      <x>940</x>
+      <y>930</y>
+      <w>70</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;60.0;50.0;60.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;50.0;50.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>868</y>
-      <w>147</w>
-      <h>133</h>
+      <x>810</x>
+      <y>1240</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Organigramma
 --
@@ -517,32 +522,40 @@ observers</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>714</y>
-      <w>147</w>
-      <h>133</h>
+      <x>1280</x>
+      <y>1120</y>
+      <w>700</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>File
 --
-MappaUnita
-ListaObserverUnita
-MappaRuoli
-ListadObserverRuoli
-MappaDipendenti
-ListaObserverDipendenti
++mapUnita:HashMap&lt;String,Unita&gt;
++observerUnita:LinkedList&lt;Observer&gt;
++mapRuoli:HashMap&lt;String,Ruolo&gt;
++observerRuoli:LinkedList&lt;Observer&gt;
++mapDipendenti:HashMap&lt;String,Dipendente&gt;
++observerDipendenti:LinkedList&lt;Observer&gt;
 --
-get
-set
-</panel_attributes>
++File(file;File)
++getMapUnita()HashMap&lt;String,Unita&gt;
++setUnita(map:HashMap&lt;String,Unita&gt;,observerUnita:LinkedList&lt;Observer&gt;,radice:Unita)
++getMapRuolo()HashMap&lt;String,Ruolo&gt;
++setUnita(mapRuolo:HashMap&lt;String,Ruolo&gt;,observerRuolo:LinkedList&lt;Observer&gt;)
++getMapDipendente()HashMapDipendente&lt;String,Dipendente&gt;
++setDipendente(mapDipendente:HashMap&lt;String,Dipendente&gt;,observerDipendente:LinkedList&lt;Observer&gt;)
++getObserverUnita():LinkedList&lt;Observer&gt;
++getObserverRuoli():LinkedList&lt;Observer&gt;
++getObserverDipendente():LinkedList&lt;Observer&gt;
++getRadice():Unita</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1176</x>
-      <y>721</y>
-      <w>98</w>
-      <h>49</h>
+      <x>1790</x>
+      <y>1000</y>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Questa classe serve 
 alla memorizzazione su 
@@ -556,24 +569,79 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>742</y>
-      <w>70</w>
-      <h>21</h>
+      <x>1750</x>
+      <y>1030</y>
+      <w>60</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>679</x>
-      <y>658</y>
-      <w>21</w>
-      <h>21</h>
+      <x>960</x>
+      <y>940</y>
+      <w>30</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>E
 style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1430</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1540</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Memento
+--
+-stato:File
+--
++Memento(stato:File)
++getStato():File</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1600</x>
+      <y>1640</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1520</x>
+      <y>1720</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Caretaker
+--
+-storico:Stack&lt;Memento&gt;
+--
++salva(m:Memento)
++ripristina():Memento
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
