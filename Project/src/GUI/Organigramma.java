@@ -20,6 +20,12 @@ public class Organigramma implements Serializable {
     private DipendentiDB dipendenti=DipendentiDB.getInstance();
     private File file;
     private Caretaker c;
+    private String filePath;
+
+    public Organigramma(String filePath){
+            this.filePath=filePath;
+            caricaOrganigramma();
+    }
 
     public Organigramma(Unita u) {
         unita.setRadice(u);
@@ -39,7 +45,6 @@ public class Organigramma implements Serializable {
         if(unita.getSottoUnita()==null){
             return;
         }
-        livello++;
         for(Unita u: sottounita)
             stampaOrganigrammaRicorsivo(u,livello);
     }
@@ -75,23 +80,22 @@ public class Organigramma implements Serializable {
     }
 
 
-    public void salvaOrganigramma(String pathFile){
+    public void salvaOrganigramma(){
         ObjectOutputStream oo;
         try{
-            oo=new ObjectOutputStream(new FileOutputStream(pathFile));
+            oo=new ObjectOutputStream(new FileOutputStream(filePath));
             oo.writeObject(c.ripristina());
             oo.close();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    public void caricaOrganigramma(String pathFile){
+    public void caricaOrganigramma(){
         ObjectInputStream oi;
         try{
-            oi=new ObjectInputStream(new FileInputStream(pathFile));
+            oi=new ObjectInputStream(new FileInputStream(filePath));
             file= new File((File)oi.readObject());
             oi.close();
-
         }catch(Exception e){
             e.printStackTrace();
         }
