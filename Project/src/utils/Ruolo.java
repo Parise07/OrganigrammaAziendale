@@ -31,6 +31,9 @@ public class Ruolo implements Serializable {
     public HashMap<String, Dipendente> getDipendenti() {
         return dipendenti;
     }
+    public Dipendente getDipendente(String email){
+        return dipendenti.get(email);
+    }
 
     @Override
     public boolean equals(Object o) {

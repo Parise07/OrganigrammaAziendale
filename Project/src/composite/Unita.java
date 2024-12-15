@@ -18,4 +18,7 @@ public interface Unita extends Serializable {
     void addDipendente(Dipendente d,Ruolo r);
     void removeDipendente(Dipendente d, Ruolo r) ;
     HashMap<String,Dipendente> getDipendenti(Ruolo r);
+
+    void addSottoUnita(Unita u);
+    Ruolo getRuolo(String r);
 }

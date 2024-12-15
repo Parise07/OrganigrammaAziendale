@@ -10,14 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class OrgangrammaGui extends JFrame {
-    /*pagina se voglio caricare o creare un organigramma
-    permettere di scegliere il file o la directory di dove lo voglio creare
-     per il file tenere in consderazione che deve avere il nome del file sia per
-     la creazione che per il caricamento
-     qui mi richiamo i metodi di organigramma carica o crea
-     memorizzarmi la variabile path file che mi servirà poi nel salvataggio
-     dell'organigramma
-     */
+
     public OrgangrammaGui() {
         setTitle("Organigramma");
         setSize(300,300);
@@ -44,8 +37,7 @@ public class OrgangrammaGui extends JFrame {
                     File fileSelezionato = sceltaFile.getSelectedFile();
                     JOptionPane.showMessageDialog(OrgangrammaGui.this,
                             "File selezionato: " + fileSelezionato.getAbsolutePath());
-                    Organigramma o=new Organigramma(fileSelezionato.getAbsolutePath());
-                    OrganigrammaPage op=new OrganigrammaPage();
+                    OrganigrammaPage op=new OrganigrammaPage(fileSelezionato.getAbsolutePath());
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(OrgangrammaGui.this, "Nessun file selezionato.");

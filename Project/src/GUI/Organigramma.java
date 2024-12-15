@@ -6,11 +6,10 @@ import memento.File;
 import DB.RuoloDB;
 import DB.UnitaDB;
 import composite.Unita;
-import memento.Memento;
+
 import utils.Dipendente;
 import utils.Ruolo;
 import java.io.*;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -25,6 +24,12 @@ public class Organigramma implements Serializable {
     public Organigramma(String filePath){
             this.filePath=filePath;
             caricaOrganigramma();
+    }
+
+    public void setFilePath(String file){
+        if(filePath==null)
+            this.filePath=file;
+
     }
 
     public Organigramma(Unita u) {
@@ -63,8 +68,11 @@ public class Organigramma implements Serializable {
         u.addRuolo(r);
         ruoli.add(r);
     }
-    public void aggiungiUnita(Unita u){
-        unita.add(u);
+    public void aggiungiUnita(Unita u,String padre){
+        unita.add(u,padre);
+    }
+    public String[] getNomiUnita(){
+        return unita.getAll();
     }
     public void removeDipendente(Unita u, Ruolo r, Dipendente d){
         u.removeDipendente(d,r);
@@ -100,5 +108,12 @@ public class Organigramma implements Serializable {
             e.printStackTrace();
         }
 
+    }
+
+    public UnitaDB getUnitaDb(){
+        return unita;
+    }
+    public Unita getUnita(String nome){
+        return unita.get(nome);
     }
 }

@@ -29,10 +29,7 @@ public class UnitaComposite implements Unita {
     public List<Unita> getSottoUnita() {
         return sottoUnita;
     }
-
-
-
-    public void addSottoUnita(Unita u) {
+    public void addSottoUnita(Unita u){
         sottoUnita.add(u);
     }
 
@@ -67,6 +64,10 @@ public class UnitaComposite implements Unita {
     @Override
     public HashMap<String, Ruolo> getRuoli() {
         return  ruoli;
+    }
+
+    public Ruolo getRuolo(String r){
+        return ruoli.get(r);
     }
 
     @Override

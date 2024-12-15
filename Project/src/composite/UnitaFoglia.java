@@ -72,4 +72,14 @@ public class UnitaFoglia implements Unita{
             throw new IllegalArgumentException("ruolo non trovato");
         return r.getDipendenti();
     }
+
+    @Override
+    public void addSottoUnita(Unita u) {
+        return;
+    }
+
+    @Override
+    public Ruolo getRuolo(String r) {
+        return ruoli.get(r);
+    }
 }

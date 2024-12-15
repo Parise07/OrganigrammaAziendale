@@ -37,12 +37,22 @@ public class UnitaDB implements DB<Unita>{
     }
 
 
+    public void add(Unita u,String padre) {
+        unita.get(padre).addSottoUnita(u);
+        unita.put(u.getNome(),u);
+        notifica();
+    }
+
+
     @Override
     public void add(Unita u) {
         unita.put(u.getNome(),u);
         notifica();
     }
 
+    public String[] getAll(){
+        return unita.keySet().toArray(new String[0]);
+    }
 
     @Override
     public Unita get(String nome) {
