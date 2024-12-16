@@ -1,17 +1,17 @@
 package DB;
 
-import memento.File;
+import memento.Originator;
 import observer.Observer;
 import utils.Ruolo;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class RuoloDB implements DB<Ruolo>{
+    private static final long serialVersionUID = 1L;
     private static RuoloDB ruoloDB;
     private HashMap<String,Ruolo>ruoli= new HashMap<>();
-    private LinkedList<Observer> osservatori= new LinkedList<>();
-    private File file;
+    private Observer osservatori;
+    private Originator file;
     private RuoloDB(){}
 
     public static RuoloDB getInstance(){ //pattern Singleton
@@ -20,6 +20,8 @@ public class RuoloDB implements DB<Ruolo>{
         }
         return ruoloDB;
     }
+
+
 
     @Override
     public void add(Ruolo ruolo) {
@@ -36,13 +38,12 @@ public class RuoloDB implements DB<Ruolo>{
 
     @Override
     public void salva() {
-        file.setRuolo(ruoli,osservatori);
+        file.setRuoloMap(ruoli);
     }
 
     @Override
     public void carica() {
-        this.osservatori=file.getObserverDipendenti();
-        this.ruoli=file.getMapRuoli();
+        this.ruoli=file.getRuoloMap();
     }
 
     @Override
@@ -56,18 +57,20 @@ public class RuoloDB implements DB<Ruolo>{
 
     @Override
     public void attach(Observer o) {
-        osservatori.add(o);
+        osservatori=o;
     }
 
     @Override
     public void detach(Observer o) {
-        osservatori.remove(o);
+        osservatori=null;
     }
 
     @Override
     public void notifica() {
-        for(Observer o:osservatori){
-            o.aggiorna();
-        }
+        osservatori.aggiorna();
+    }
+
+    public void setFile(Originator o){
+        this.file=o;
     }
 }

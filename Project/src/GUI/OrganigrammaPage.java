@@ -7,8 +7,7 @@ import utils.Ruolo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.File;
 
 
@@ -479,6 +478,7 @@ public class OrganigrammaPage extends JFrame {
                 // Aggiunge l'estensione ".bin" al nome del file
                 String percorsoCompleto = directorySelezionata.getAbsolutePath() + File.separator + nomeFile.trim();
                 o.setFilePath(percorsoCompleto);
+                o.salvaOrganigramma();
                 // Procedi con il salvataggio o altre operazioni
                 JOptionPane.showMessageDialog(this, "File salvato: " + percorsoCompleto);
                 //tornare alla principale

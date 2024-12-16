@@ -1,5 +1,7 @@
 package composite;
 
+import observer.Observer;
+import observer.ObserverConcreto;
 import utils.Dipendente;
 import utils.Ruolo;
 
@@ -8,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UnitaComposite implements Unita {
+    private static final long serialVersionUID = 1L;
     private String nome;
     private Unita padre;
     private HashMap<String,Ruolo>ruoli;

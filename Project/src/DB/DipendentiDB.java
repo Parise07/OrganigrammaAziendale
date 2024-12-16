@@ -1,17 +1,17 @@
 package DB;
 
-import memento.File;
+import memento.Originator;
 import observer.Observer;
 import utils.Dipendente;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class DipendentiDB implements DB<Dipendente>{
+    private static final long serialVersionUID = 1L;
     private static DipendentiDB dipendentiDB;
     private HashMap<String,Dipendente>dipendenti=new HashMap<>();
-    private LinkedList<Observer> osservatori = new LinkedList<>();
-    private File file;
+    private Observer osservatori;
+    private Originator file;
     private DipendentiDB(){}
 
     public static DipendentiDB getInstance(){ //pattern Singleton
@@ -20,6 +20,7 @@ public class DipendentiDB implements DB<Dipendente>{
         }
         return dipendentiDB;
     }
+
 
 
     @Override
@@ -35,13 +36,13 @@ public class DipendentiDB implements DB<Dipendente>{
 
     @Override
     public void salva() {
-        file.setDipendenti(dipendenti,osservatori);
+        file.setDipendentiMap(dipendenti);
+
     }
 
     @Override
     public void carica() {
-        this.osservatori=file.getObserverDipendenti();
-        this.dipendenti=file.getMapDipendenti();
+        this.dipendenti=file.getDipendentiMap();
     }
 
     @Override
@@ -55,18 +56,20 @@ public class DipendentiDB implements DB<Dipendente>{
 
     @Override
     public void attach(Observer o) {
-        osservatori.add(o);
+        osservatori=o;
     }
 
     @Override
     public void detach(Observer o) {
-        osservatori.remove(o);
+        osservatori=null;
     }
 
     @Override
     public void notifica() {
-        for(Observer o:osservatori){
-            o.aggiorna();
-        }
+            osservatori.aggiorna();
+    }
+
+    public void setFile(Originator o){
+        this.file=o;
     }
 }

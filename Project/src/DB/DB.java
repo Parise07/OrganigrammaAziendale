@@ -2,8 +2,7 @@ package DB;
 
 import observer.Observer;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedList;
+
 
 public interface DB<E> extends Serializable {
     void add(E e);

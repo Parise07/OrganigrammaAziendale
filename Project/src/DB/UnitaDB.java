@@ -2,20 +2,19 @@ package DB;
 
 import composite.Unita;
 import composite.UnitaComposite;
-import memento.File;
+import memento.Originator;
 import observer.Observer;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-
 
 
 public class UnitaDB implements DB<Unita>{
+    private static final long serialVersionUID = 1L;
     private static UnitaDB unitaDB;
     private HashMap<String,Unita> unita= new HashMap<>();
-    private LinkedList<Observer>osservatori= new LinkedList<>();
-    private Unita radice;
-    private File file;
+    private Observer osservatori;
+    private Unita radice=null;
+    private Originator file;
 
     private UnitaDB(){}
 
@@ -36,6 +35,9 @@ public class UnitaDB implements DB<Unita>{
         this.add(u);
     }
 
+    public void setFile(Originator o){
+        this.file=o;
+    }
 
     public void add(Unita u,String padre) {
         unita.get(padre).addSottoUnita(u);
@@ -61,13 +63,13 @@ public class UnitaDB implements DB<Unita>{
 
     @Override
     public void salva() {
-        file.setUnita(unita,osservatori,radice);
+        file.setUnitaMap(unita);
+        file.setRadice(radice);
     }
 
     @Override
     public void carica() {
-        this.osservatori=file.getObserverDipendenti();
-        this.unita=file.getMapUnita();
+        this.unita=file.getUnitaMap();
         this.radice=file.getRadice();
     }
     @Override
@@ -89,18 +91,16 @@ public class UnitaDB implements DB<Unita>{
 
     @Override
     public void attach(Observer o) {
-        osservatori.add(o);
+        osservatori=o;
     }
 
     @Override
     public void detach(Observer o) {
-        osservatori.remove(o);
+        osservatori=null;
     }
 
     @Override
     public void notifica() {
-        for(Observer o:osservatori){
-            o.aggiorna();
-        }
+        osservatori.aggiorna();
     }
 }

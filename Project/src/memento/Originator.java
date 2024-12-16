@@ -7,20 +7,19 @@ import utils.Ruolo;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Memento implements Serializable {
+public class Originator implements Serializable {
     private HashMap<String, Unita> unitaMap;
     private HashMap<String, Ruolo>ruoloMap;
     private HashMap<String, Dipendente>dipendentiMap;
     private Unita radice;
-    private Caretaker c;
+    private Caretaker c=new Caretaker();
 
-    public Memento(Originator o, Caretaker c){
+
+    public void setStato(Originator o){
         this.unitaMap=o.getUnitaMap();
         this.radice=o.getRadice();
         this.ruoloMap=o.getRuoloMap();
         this.dipendentiMap=o.getDipendentiMap();
-        this.c=c;
-        c.salva(this);
     }
 
     public HashMap<String, Unita> getUnitaMap() {
@@ -53,5 +52,15 @@ public class Memento implements Serializable {
 
     public void setRadice(Unita radice) {
         this.radice = radice;
+    }
+    public void save(){
+        new Memento(this,c);
+    }
+    public void restore(){
+        Memento m=c.ripristina();
+        this.unitaMap=m.getUnitaMap();
+        this.radice=m.getRadice();
+        this.ruoloMap=m.getRuoloMap();
+        this.dipendentiMap=m.getDipendentiMap();
     }
 }
