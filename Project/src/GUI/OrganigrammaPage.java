@@ -8,20 +8,31 @@ import utils.Ruolo;
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
 
 
 public class OrganigrammaPage extends JFrame {
     private Organigramma o;
-
+    private final mxGraph graph;
+    private final Object parent;
 
     public OrganigrammaPage(String pathFile){
        o=new Organigramma(pathFile);
+        graph = new mxGraph();
+        parent = graph.getDefaultParent();
        page();
     }
 
     public OrganigrammaPage(Unita radice){
         o=new Organigramma(radice);
+        graph = new mxGraph();
+        parent = graph.getDefaultParent();
         page();
     }
 
@@ -41,21 +52,64 @@ public class OrganigrammaPage extends JFrame {
         // Rendi visibile la finestra
         setVisible(true);
     }
-    public JPanel  raffiguraOrganigramma(){
-        JPanel organigrammaPanel= new JPanel();
+    public JPanel raffiguraOrganigramma() {
+        // Creazione del pannello principale
+        JPanel organigrammaPanel = new JPanel(new BorderLayout());
         organigrammaPanel.setBackground(Color.LIGHT_GRAY);
-        organigrammaPanel.setLayout(new BorderLayout());
-        JLabel organigrammaLabel = new JLabel("Raffigurazione Organigramma", SwingConstants.CENTER);
-        organigrammaPanel.add(organigrammaLabel, BorderLayout.CENTER);
-        add(organigrammaPanel, BorderLayout.CENTER);
-        return organigrammaPanel;
 
+        // Disabilita il layout automatico predefinito
+        graph.setAutoSizeCells(true);
+        graph.getModel().beginUpdate();
+
+        try {
+            // Costruzione ricorsiva del grafo
+            buildGraph(o.getRadice(), null);
+        } finally {
+            graph.getModel().endUpdate();
+        }
+
+        // Applica il layout gerarchico al grafo
+        mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
+        layout.execute(parent);
+
+        // Creazione del componente di visualizzazione del grafo
+        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        graphComponent.setBackground(Color.WHITE);
+
+        // Aggiungi il componente di visualizzazione al pannello
+        organigrammaPanel.add(graphComponent, BorderLayout.CENTER);
+
+        return organigrammaPanel;
+    }
+
+    private void buildGraph(Unita unita, Object parentCell) {
+        Object unitCell = graph.insertVertex(parent, null, unita.getNome(), 20, 20, 100, 40);
+        JButton infoButton=new JButton("Info");
+        if (parentCell != null) {
+            graph.insertEdge(parent, null, "", parentCell, unitCell);
+        }
+
+        for (Unita subUnit : unita.getSottoUnita()) {
+            buildGraph(subUnit, unitCell);
+        }
+
+    }
+    private void aggiornaGrafico(){
+        graph.getModel().beginUpdate();
+        try {
+            graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
+            buildGraph(o.getRadice(), null);
+        } finally {
+            graph.getModel().endUpdate();
+        }
+        mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
+        layout.execute(parent);
     }
     public JPanel  bottoni(){
         JPanel bottoniPanel = new JPanel(new BorderLayout()); // Layout principale
 
         // Pannello per i gruppi di tre pulsanti
-        JPanel gruppiPanel = new JPanel(new GridLayout(3, 3, 10, 10)); // Griglia 3x3 con spaziatura
+        JPanel gruppiPanel = new JPanel(new GridLayout(4, 3, 10, 10)); // Griglia 3x3 con spaziatura
         JButton aggiungiU = new JButton("Aggiungi Unita");
         JButton removeU = new JButton("Rimuovi Unita");
         JButton aggiungiR = new JButton("Aggiungi Ruolo");
@@ -65,7 +119,7 @@ public class OrganigrammaPage extends JFrame {
         JButton modificaD = new JButton("Modifica Dipendente");
         JButton removeD = new JButton("Remove Dipendente");
         JButton modificaU = new JButton("Modifica Unita");
-
+        JButton info=new JButton("Info");
         // Aggiungi i pulsanti ai gruppi
         gruppiPanel.add(aggiungiU);
         gruppiPanel.add(aggiungiR);
@@ -76,10 +130,31 @@ public class OrganigrammaPage extends JFrame {
         gruppiPanel.add(removeU);
         gruppiPanel.add(removeR);
         gruppiPanel.add(removeD);
+        gruppiPanel.add(info);
 
         // Pannello per il pulsante "Salva"
         JPanel salvaPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton salvaButton = new JButton("Salva");
+        JButton redoButton = new JButton("Redo");
+        JButton undoButton = new JButton("Undo");
+        redoButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                o.redo();
+                aggiornaGrafico();
+            }
+        });
+        undoButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                o.undo();
+                aggiornaGrafico();
+            }
+        });
+        salvaPanel.add(undoButton);
+        salvaPanel.add(redoButton);
         salvaPanel.add(salvaButton);
 
         // Aggiungi i due pannelli al pannello principale
@@ -91,6 +166,7 @@ public class OrganigrammaPage extends JFrame {
         aggiungiD.addActionListener(e->apriDialogoAggiungiD());
         removeR.addActionListener(e->apriDialogoRemoveR());
         removeD.addActionListener(e->apriDialogoRemoveD());
+        info.addActionListener(e->bottoniPerUnita());
         salvaButton.addActionListener(e->apriDialogoSalva());
         return bottoniPanel;
     }
@@ -132,6 +208,8 @@ public class OrganigrammaPage extends JFrame {
             if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty()) {
                 Unita u = new UnitaComposite(nomeUnita, o.getUnitaDb().get(selezione));
                 o.aggiungiUnita(u, selezione);
+                aggiornaGrafico();
+
                 JOptionPane.showMessageDialog(this, "Unità aggiunta: " + u.toString());
                 aggiungiUnita.dispose(); // Chiudi il dialogo
             } else {
@@ -289,6 +367,7 @@ public class OrganigrammaPage extends JFrame {
 
             if (selezione != null) {
                 o.removeUnita(o.getUnitaDb().get(selezione));
+                aggiornaGrafico();
                 JOptionPane.showMessageDialog(this, "Unità rimossa.");
                 rimuoviUnita.dispose(); // Chiudi il dialogo
             } else {
@@ -488,4 +567,91 @@ public class OrganigrammaPage extends JFrame {
             }
         }
     }
+
+    private void bottoniPerUnita() {
+        // Creazione della finestra di dialogo
+        JDialog infoUnita = new JDialog(this, "Informazioni Unità", true);
+        infoUnita.setSize(400, 300);
+        infoUnita.setLocationRelativeTo(this);
+
+        // Layout principale
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+
+        // Sezione per il menu a tendina
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel labelTendina = new JLabel("Seleziona padre:");
+        topPanel.add(labelTendina);
+
+        // Verifica che l'oggetto "o" sia valido
+        if (o == null) {
+            JOptionPane.showMessageDialog(this, "Errore: Oggetto 'o' non inizializzato.", "Errore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Creazione del menu a tendina
+        String[] opzioni = o.getNomiUnita(); // Supponendo che o.getNomiUnita() restituisca un array di stringhe
+        JComboBox<String> menuTendina = new JComboBox<>(opzioni);
+        topPanel.add(menuTendina);
+
+        // Area testo per mostrare le informazioni
+        JTextArea infoTextArea = new JTextArea();
+        infoTextArea.setEditable(false);
+        infoTextArea.setLineWrap(true);
+        infoTextArea.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(infoTextArea);
+
+        // Aggiungere il pannello superiore al layout principale
+        panel.add(topPanel, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Bottone Chiudi
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton chiudiButton = new JButton("Chiudi");
+        buttonPanel.add(chiudiButton);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Azione per il menu a tendina: aggiornamento delle informazioni
+        menuTendina.addActionListener(e -> {
+            String selezione = (String) menuTendina.getSelectedItem();
+            if (selezione == null) {
+                selezione = o.getRadice().getNome();
+            }
+
+            Unita unita = o.getUnita(selezione);
+            if (unita == null) {
+                JOptionPane.showMessageDialog(this, "Unità non trovata!", "Errore", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Costruzione delle informazioni
+            StringBuilder informazioniUnita = new StringBuilder();
+            for (String r : unita.getRuoli().keySet()) {
+                informazioniUnita.append(r).append(":\n");
+                Ruolo ruolo = unita.getRuolo(r);
+                for (String email : ruolo.getDipendenti().keySet()) {
+                    informazioniUnita.append(" - ").append(ruolo.getDipendente(email).toString()).append("\n");
+                }
+            }
+
+            // Aggiornamento dell'area di testo
+            infoTextArea.setText(informazioniUnita.toString());
+        });
+
+        // Azione per il bottone Chiudi
+        chiudiButton.addActionListener(e -> {
+            int risposta = JOptionPane.showConfirmDialog(this,
+                    "Sicuro di voler chiudere le informazioni?",
+                    "Conferma Chiusura",
+                    JOptionPane.YES_NO_OPTION);
+            if (risposta == JOptionPane.YES_OPTION) {
+                infoUnita.dispose(); // Chiude la finestra
+            }
+        });
+
+        // Aggiunta del pannello principale alla finestra di dialogo
+        infoUnita.add(panel);
+        infoUnita.setVisible(true);
+    }
+
+
 }

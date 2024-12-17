@@ -24,6 +24,6 @@ public class Dipendente implements Serializable {
         return email;
     }
     public String toString(){
-        return this.getNome()+" "+this.getCognome();
+        return this.getNome()+" "+this.getCognome()+" "+this.getEmail();
     }
 }

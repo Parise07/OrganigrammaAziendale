@@ -9,8 +9,8 @@ public class Caretaker implements Serializable {
 
     // Salva uno stato nel Caretaker
     public void salva(Memento memento) {
-        storico.push(memento);
-        redoStack.clear(); // Puliamo lo stack di redo ogni volta che salviamo un nuovo stato
+        storico.push(memento);// Puliamo lo stack di redo ogni volta che salviamo un nuovo stato
+        redoStack.clear();
         System.out.println("Stato salvato.");
     }
 

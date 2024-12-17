@@ -23,6 +23,5 @@ public class ObserverConcreto implements Observer{
         ruoli.salva();
         dipendenti.salva();
         file.save();
-        o.stampaOrganigramma();
     }
 }

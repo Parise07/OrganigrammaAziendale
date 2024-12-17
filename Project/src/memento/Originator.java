@@ -63,4 +63,11 @@ public class Originator implements Serializable {
         this.ruoloMap=m.getRuoloMap();
         this.dipendentiMap=m.getDipendentiMap();
     }
+    public void redo(){
+        Memento m=c.redo();
+        this.unitaMap=m.getUnitaMap();
+        this.radice=m.getRadice();
+        this.ruoloMap=m.getRuoloMap();
+        this.dipendentiMap=m.getDipendentiMap();
+    }
 }

@@ -1,7 +1,5 @@
 package composite;
 
-import observer.Observer;
-import observer.ObserverConcreto;
 import utils.Dipendente;
 import utils.Ruolo;
 

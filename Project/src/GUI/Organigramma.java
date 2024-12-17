@@ -45,24 +45,6 @@ public class Organigramma implements Serializable {
         return unita.getRadice();
     }
 
-    public void stampaOrganigramma(){
-        stampaOrganigrammaRicorsivo(this.getRadice(),0);
-    }
-
-    private void stampaOrganigrammaRicorsivo(Unita unita, int livello) {
-        List<Unita> sottounita=  unita.getSottoUnita();
-        if(unita.getSottoUnita()==null){
-            return;
-        }
-        for(Unita u: sottounita)
-            stampaOrganigrammaRicorsivo(u,livello);
-    }
-    /*
-    livello non mi serve averlo poichè la stampa dei sottolivell di ogni
-    sottunità avviene in contemporanea e stampa organigramma me la rixhiamo nella
-    gui ogni volta che faccio la chiamata stamp un unità e la grafico tramite
-    grafica unità
-     */
 
     public void aggiungiDipendente(Dipendente d,Unita u, Ruolo r){
         u.addDipendente(d,r);
@@ -105,8 +87,11 @@ public class Organigramma implements Serializable {
         }
     }
     public void caricaOrganigramma() {
+
         try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(filePath))) {
             file.setStato((Originator) oi.readObject());
+            observer= new ObserverConcreto(this,file);
+            registraObserver();
             System.out.println("Caricamento: " + file);
             unita.setFile(file);
             ruoli.setFile(file);
@@ -114,7 +99,7 @@ public class Organigramma implements Serializable {
             unita.carica();
             ruoli.carica();
             dipendenti.carica();
-            registraObserver();
+
             System.out.println("Organigramma caricato correttamente.");
         } catch (FileNotFoundException e) {
             System.err.println("File non trovato: " + filePath);
@@ -136,5 +121,14 @@ public class Organigramma implements Serializable {
     }
     public Unita getUnita(String nome){
         return unita.get(nome);
+    }
+
+    public void redo(){
+        file.redo();
+        observer.aggiorna();
+    }
+    public void undo(){
+        file.restore();
+        observer.aggiorna();
     }
 }

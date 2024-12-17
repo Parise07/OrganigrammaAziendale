@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface Unita extends Serializable {
+
     String getNome();
     List<Unita> getSottoUnita();
     void setPadre(Unita u);
