@@ -11,16 +11,14 @@ public class Memento implements Serializable {
     private HashMap<String, Unita> unitaMap;
     private HashMap<String, Ruolo>ruoloMap;
     private HashMap<String, Dipendente>dipendentiMap;
-    private Unita radice;
-    private Caretaker c;
+    private String radice;
 
-    public Memento(Originator o, Caretaker c){
-        this.unitaMap=o.getUnitaMap();
-        this.radice=o.getRadice();
-        this.ruoloMap=o.getRuoloMap();
-        this.dipendentiMap=o.getDipendentiMap();
-        this.c=c;
-        c.salva(this);
+    public Memento(Originator o){
+        this.unitaMap = new HashMap<>(o.getUnitaMap()); // Deep copy se necessario
+        this.radice = o.getRadice(); // Copia profonda o serializzazione se complesso
+        this.ruoloMap = new HashMap<>(o.getRuoloMap());
+        this.dipendentiMap = new HashMap<>(o.getDipendentiMap());
+
     }
 
     public HashMap<String, Unita> getUnitaMap() {
@@ -47,11 +45,11 @@ public class Memento implements Serializable {
         this.ruoloMap = ruoloMap;
     }
 
-    public Unita getRadice() {
+    public String getRadice() {
         return radice;
     }
 
-    public void setRadice(Unita radice) {
+    public void setRadice(String radice) {
         this.radice = radice;
     }
 }

@@ -3,16 +3,17 @@ package composite;
 import utils.Dipendente;
 import utils.Ruolo;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class UnitaFoglia implements Unita{
     private static final long serialVersionUID = 1L;
     private String nome;
-    private Unita padre;
+    private String padre;
     private HashMap<String,Ruolo>ruoli;
 
-    public UnitaFoglia(String nome,Unita padre){
+    public UnitaFoglia(String nome,String padre){
         this.nome=nome;
         this.padre=padre;
         ruoli=new HashMap<>();
@@ -29,12 +30,12 @@ public class UnitaFoglia implements Unita{
     }
 
     @Override
-    public void setPadre(Unita u) {
+    public void setPadre(String u) {
         this.padre=u;
     }
 
     @Override
-    public Unita getPadre() {
+    public String getPadre() {
         return padre;
     }
 
@@ -82,5 +83,8 @@ public class UnitaFoglia implements Unita{
     @Override
     public Ruolo getRuolo(String r) {
         return ruoli.get(r);
+    }
+    public void copiaStato(Unita u){
+        this.ruoli=u.getRuoli();
     }
 }

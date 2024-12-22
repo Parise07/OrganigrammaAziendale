@@ -1,26 +1,28 @@
 package memento;
 
 import java.io.Serializable;
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class Caretaker implements Serializable {
-    private final Stack<Memento> storico = new Stack<>();
-    private final Stack<Memento> redoStack = new Stack<>();
+    private final LinkedList<Memento> storico = new LinkedList<>();
+    private final LinkedList<Memento> redoList = new LinkedList<>();
 
     // Salva uno stato nel Caretaker
     public void salva(Memento memento) {
-        storico.push(memento);// Puliamo lo stack di redo ogni volta che salviamo un nuovo stato
-        redoStack.clear();
+        storico.addFirst(memento); // Inserisce in fondo alla coda
+        redoList.clear(); // Dopo un nuovo salvataggio, lo stack di redo viene svuotato
         System.out.println("Stato salvato.");
     }
 
-    // Ripristina l'ultimo stato (Undo)
+    // Ripristina il primo stato salvato (Undo)
     public Memento ripristina() {
         if (!storico.isEmpty()) {
-            Memento ultimo = storico.pop();
-            redoStack.push(ultimo); // Spostiamo nello stack di redo
+            Memento primo = storico.removeFirst(); // Rimuove il primo elemento salvato (FIFO)
+            redoList.addFirst(primo); // Lo sposta nella coda di redo
+            Memento secondo =storico.getFirst();
+            redoList.addFirst(secondo);
             System.out.println("Ripristino dello stato...");
-            return ultimo;
+            return secondo;
         }
         System.out.println("Nessuno stato da ripristinare.");
         return null;
@@ -28,23 +30,15 @@ public class Caretaker implements Serializable {
 
     // Ripristina lo stato successivo (Redo)
     public Memento redo() {
-        if (!redoStack.isEmpty()) {
-            Memento redoMemento = redoStack.pop();
-            storico.push(redoMemento); // Spostiamo nello stack di undo
-            System.out.println("Ripristino redo dello stato...");
-            return redoMemento;
+        if (!redoList.isEmpty()) {
+            Memento primo = redoList.removeFirst(); // Rimuove il primo elemento salvato (FIFO)
+            storico.addFirst(primo); // Lo sposta nella coda di redo
+            Memento secondo =redoList.getFirst();
+            storico.addFirst(secondo);
+            System.out.println("Ripristino dello stato...");
+            return secondo;
         }
-        System.out.println("Nessuno stato da rifare.");
+        System.out.println("Nessuno stato da ripristinare.");
         return null;
-    }
-
-    // Controlla se ci sono stati da ripristinare
-    public boolean hasUndo() {
-        return !storico.isEmpty();
-    }
-
-    // Controlla se ci sono stati da rifare
-    public boolean hasRedo() {
-        return !redoStack.isEmpty();
     }
 }

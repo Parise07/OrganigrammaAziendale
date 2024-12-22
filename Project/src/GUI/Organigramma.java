@@ -9,7 +9,6 @@ import observer.ObserverConcreto;
 import utils.Dipendente;
 import utils.Ruolo;
 import java.io.*;
-import java.util.List;
 
 
 public class Organigramma implements Serializable {
@@ -125,10 +124,31 @@ public class Organigramma implements Serializable {
 
     public void redo(){
         file.redo();
-        observer.aggiorna();
+        unita.carica();
+        ruoli.carica();
+        dipendenti.carica();
     }
     public void undo(){
         file.restore();
-        observer.aggiorna();
+        unita.carica();
+        ruoli.carica();
+        dipendenti.carica();
+    }
+    public void modificaU(Unita u, String nuova){
+        unita.modifica(u,nuova);
+    }
+    public void modificaD(Dipendente vecchio, Dipendente nuovo, Ruolo r, Unita u){
+            if(vecchio.getEmail()!= nuovo.getEmail()){
+                this.removeDipendente(u,r,vecchio);
+                this.aggiungiDipendente(nuovo,u,r);
+            }
+        this.aggiungiDipendente(nuovo,u,r);
+    }
+    public void modificaR(Ruolo vecchio, Ruolo nuovo,Unita u){
+        if(vecchio.getNome()!= nuovo.getNome()){
+            this.removeRuolo(u,vecchio);
+            this.aggiungiRuolo(nuovo,u);
+            nuovo.setState(vecchio);
+        }
     }
 }

@@ -13,7 +13,7 @@ public class UnitaDB implements DB<Unita>{
     private static UnitaDB unitaDB;
     private HashMap<String,Unita> unita= new HashMap<>();
     private Observer osservatori;
-    private Unita radice=null;
+    private String radice;
     private Originator file;
 
     private UnitaDB(){}
@@ -26,11 +26,11 @@ public class UnitaDB implements DB<Unita>{
     }
 
     public Unita getRadice(){
-        return radice;
+        return unita.get(radice)    ;
     }
 
     public void setRadice(Unita u){
-        this.radice=u;
+        this.radice=u.getNome();
         u.setPadre(null);
         unita.put(u.getNome(),u);
     }
@@ -41,7 +41,7 @@ public class UnitaDB implements DB<Unita>{
 
     public void add(Unita u,String padre) {
         unita.get(padre).addSottoUnita(u);
-        u.setPadre(unita.get(padre));
+        u.setPadre(padre);
         unita.put(u.getNome(),u);
         notifica();
     }
@@ -78,7 +78,7 @@ public class UnitaDB implements DB<Unita>{
         if(!unita.containsKey(u.getNome())){
             throw new IllegalArgumentException("Unita non presente nel DB");
         }
-        Unita padre= unita.get(u.getPadre().getNome());
+        Unita padre= unita.get(u.getPadre());
         if(!u.getSottoUnita().isEmpty()){
             for(Unita i: u.getSottoUnita()){
                 padre.addSottoUnita(i);
@@ -102,5 +102,14 @@ public class UnitaDB implements DB<Unita>{
     @Override
     public void notifica() {
         osservatori.aggiorna();
+    }
+
+    public void modifica(Unita u, String nuova) {
+        if(!u.getNome().equals(nuova)){
+            Unita nuovaAdd= new UnitaComposite(nuova,u.getPadre());
+            nuovaAdd.copiaStato(u);
+            this.add(nuovaAdd,nuovaAdd.getPadre());
+            this.remove(u);
+        }
     }
 }

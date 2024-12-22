@@ -55,4 +55,8 @@ public class Ruolo implements Serializable {
                 ", dipendenti=" + dipendenti +
                 '}';
     }
+
+    public void setState(Ruolo vecchio) {
+        this.dipendenti=vecchio.getDipendenti();
+    }
 }

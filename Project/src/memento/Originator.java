@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Originator implements Serializable {
-    private HashMap<String, Unita> unitaMap;
-    private HashMap<String, Ruolo>ruoloMap;
-    private HashMap<String, Dipendente>dipendentiMap;
-    private Unita radice;
-    private Caretaker c=new Caretaker();
+    private HashMap<String, Unita> unitaMap=new HashMap<>();
+    private HashMap<String, Ruolo>ruoloMap=new HashMap<>();
+    private HashMap<String, Dipendente>dipendentiMap=new HashMap<>();
+    private String radice;
+    private final Caretaker c=new Caretaker();
 
 
     public void setStato(Originator o){
@@ -20,6 +20,7 @@ public class Originator implements Serializable {
         this.radice=o.getRadice();
         this.ruoloMap=o.getRuoloMap();
         this.dipendentiMap=o.getDipendentiMap();
+        save();
     }
 
     public HashMap<String, Unita> getUnitaMap() {
@@ -46,28 +47,32 @@ public class Originator implements Serializable {
         this.ruoloMap = ruoloMap;
     }
 
-    public Unita getRadice() {
+    public String getRadice() {
         return radice;
     }
 
-    public void setRadice(Unita radice) {
+    public void setRadice(String radice) {
         this.radice = radice;
     }
     public void save(){
-        new Memento(this,c);
+       c.salva( new Memento(this));
     }
     public void restore(){
-        Memento m=c.ripristina();
-        this.unitaMap=m.getUnitaMap();
-        this.radice=m.getRadice();
-        this.ruoloMap=m.getRuoloMap();
-        this.dipendentiMap=m.getDipendentiMap();
+        Memento memento = c.ripristina();
+        if (memento != null) {
+            this.unitaMap =new HashMap<>( memento.getUnitaMap());
+            this.radice = memento.getRadice();
+            this.ruoloMap =new HashMap<>(memento.getRuoloMap()) ;
+            this.dipendentiMap =new HashMap<>(memento.getDipendentiMap()) ;
+        }
     }
     public void redo(){
-        Memento m=c.redo();
-        this.unitaMap=m.getUnitaMap();
-        this.radice=m.getRadice();
-        this.ruoloMap=m.getRuoloMap();
-        this.dipendentiMap=m.getDipendentiMap();
+            Memento memento = c.redo();
+            if (memento != null) {
+                this.unitaMap = memento.getUnitaMap();
+                this.radice = memento.getRadice();
+                this.ruoloMap = memento.getRuoloMap();
+                this.dipendentiMap = memento.getDipendentiMap();
+            }
     }
 }

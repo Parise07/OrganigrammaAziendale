@@ -10,7 +10,7 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
+
 import java.io.File;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.swing.mxGraphComponent;
@@ -23,10 +23,10 @@ public class OrganigrammaPage extends JFrame {
     private final Object parent;
 
     public OrganigrammaPage(String pathFile){
-       o=new Organigramma(pathFile);
+        o=new Organigramma(pathFile);
         graph = new mxGraph();
         parent = graph.getDefaultParent();
-       page();
+        page();
     }
 
     public OrganigrammaPage(Unita radice){
@@ -84,13 +84,13 @@ public class OrganigrammaPage extends JFrame {
 
     private void buildGraph(Unita unita, Object parentCell) {
         Object unitCell = graph.insertVertex(parent, null, unita.getNome(), 20, 20, 100, 40);
-        JButton infoButton=new JButton("Info");
         if (parentCell != null) {
             graph.insertEdge(parent, null, "", parentCell, unitCell);
         }
 
         for (Unita subUnit : unita.getSottoUnita()) {
-            buildGraph(subUnit, unitCell);
+            if(o.getUnita(subUnit.getNome())!=null)
+                buildGraph(subUnit, unitCell);
         }
 
     }
@@ -105,6 +105,7 @@ public class OrganigrammaPage extends JFrame {
         mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
         layout.execute(parent);
     }
+
     public JPanel  bottoni(){
         JPanel bottoniPanel = new JPanel(new BorderLayout()); // Layout principale
 
@@ -168,8 +169,13 @@ public class OrganigrammaPage extends JFrame {
         removeD.addActionListener(e->apriDialogoRemoveD());
         info.addActionListener(e->bottoniPerUnita());
         salvaButton.addActionListener(e->apriDialogoSalva());
+        modificaU.addActionListener(e->apriDialogoModificaU());
+        modificaD.addActionListener(e->apriDialogoModificaD());
+        modificaR.addActionListener(e->apriDialogoModificaR());
+
         return bottoniPanel;
     }
+
 
 
 
@@ -206,7 +212,7 @@ public class OrganigrammaPage extends JFrame {
             String nomeUnita = textField.getText();
 
             if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty()) {
-                Unita u = new UnitaComposite(nomeUnita, o.getUnitaDb().get(selezione));
+                Unita u = new UnitaComposite(nomeUnita, selezione);
                 o.aggiungiUnita(u, selezione);
                 aggiornaGrafico();
 
@@ -428,7 +434,7 @@ public class OrganigrammaPage extends JFrame {
         // Azione sul bottone di conferma
         confermaButton.addActionListener(e -> {
             String selezione = (String) menuTendina.getSelectedItem();
-            String selezioneR = (String) menuTendinaR.getSelectedItem();;
+            String selezioneR = (String) menuTendinaR.getSelectedItem();
 
             if (selezione != null && selezioneR != null) {
                 o.removeRuolo(o.getUnitaDb().get(selezione),o.getUnitaDb().get(selezione).getRuolo(selezioneR));
@@ -653,5 +659,205 @@ public class OrganigrammaPage extends JFrame {
         infoUnita.setVisible(true);
     }
 
+    private void apriDialogoModificaU() {
+            JDialog aggiungiUnita = new JDialog(this, "Modifica Unita", true);
+            aggiungiUnita.setSize(300, 200);
+            aggiungiUnita.setLocationRelativeTo(this);
 
+            // Pannello principale del dialogo
+            JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
+
+            // Etichetta e menu a tendina
+            JLabel labelTendina = new JLabel("Seleziona padre:");
+            String[] opzioni = o.getNomiUnita();
+            JComboBox<String> menuTendina = new JComboBox<>(opzioni);
+
+            JLabel label = new JLabel("Inserisci nome Unita:");
+            JTextField textField = new JTextField();
+
+            // Bottone di conferma
+            JButton confermaButton = new JButton("Conferma");
+
+            // Aggiungi i componenti al pannello
+            panel.add(labelTendina);
+            panel.add(menuTendina);
+            panel.add(label);
+            panel.add(textField);
+            panel.add(new JLabel()); // Spaziatore per allineamento
+            panel.add(confermaButton);
+
+            // Azione sul bottone di conferma
+            confermaButton.addActionListener(e -> {
+                String selezione = (String) menuTendina.getSelectedItem();
+                String nomeUnita = textField.getText();
+
+                if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty()) {
+                    Unita vecchia= o.getUnita(selezione);
+                    o.modificaU(vecchia, nomeUnita);
+                    aggiornaGrafico();
+
+                    JOptionPane.showMessageDialog(this, "Unità modificata: ");
+                    aggiungiUnita.dispose(); // Chiudi il dialogo
+                } else {
+                    JOptionPane.showMessageDialog(this, "Inserisci un nome valido per l'unità.", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+            aggiungiUnita.add(panel);
+            aggiungiUnita.setVisible(true);
+
+    }
+    private void apriDialogoModificaD() {
+        JDialog aggiungiDipendente = new JDialog(this, "Aggiungi Dipendente", true);
+        aggiungiDipendente.setSize(600, 200);
+        aggiungiDipendente.setLocationRelativeTo(this);
+
+        // Pannello principale del dialogo
+        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
+
+        // Etichetta e menu a tendina per le unità
+        JLabel labelTendina = new JLabel("Seleziona Unità:");
+        String[] opzioni = o.getNomiUnita(); // Recupera i nomi delle unità
+        JComboBox<String> menuTendina = new JComboBox<>(opzioni);
+
+        // Etichetta e menu a tendina per i ruoli
+        JLabel labelTendinaR = new JLabel("Seleziona Ruolo:");
+        JComboBox<String> menuTendinaR = new JComboBox<>();
+
+        JLabel labelTendinaD = new JLabel("Seleziona Dipendente:");
+        JComboBox<String> menuTendinaD = new JComboBox<>();
+
+        // Aggiorna i ruoli in base all'unità selezionata
+        menuTendina.addActionListener(e -> {
+            String selezioneUnita = (String) menuTendina.getSelectedItem();
+            if (selezioneUnita != null) {
+                String[] ruoli = o.getUnita(selezioneUnita).getRuoli().keySet().toArray(new String[0]);
+                menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoli));
+                String selezioneRuolo = (String) menuTendinaR.getSelectedItem();
+                if (selezioneRuolo != null) {
+                    String[] dipendenti = o.getUnita(selezioneUnita).getRuolo(selezioneRuolo).getDipendenti().keySet().toArray(new String[0]);
+                    menuTendinaD.setModel(new DefaultComboBoxModel<>(dipendenti));
+                }
+            }
+        });
+
+        // Imposta i ruoli iniziali per l'unità predefinita
+        if (opzioni.length > 0) {
+            String unitaIniziale = opzioni[0];
+            String[] ruoliIniziali = o.getUnita(unitaIniziale).getRuoli().keySet().toArray(new String[0]);
+            String[] dipendenti = o.getUnita(unitaIniziale).getRuolo(ruoliIniziali[0]).getDipendenti().keySet().toArray(new String[0]);
+            menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoliIniziali));
+        }
+
+        // Altri campi di input
+        JLabel label = new JLabel("Inserisci nome Dipendente:");
+        JTextField textField = new JTextField();
+        JLabel labelC = new JLabel("Inserisci cognome Dipendente:");
+        JTextField textFieldC = new JTextField();
+        JLabel labelE = new JLabel("Inserisci email Dipendente:");
+        JTextField textFieldE = new JTextField();
+
+        // Bottone di conferma
+        JButton confermaButton = new JButton("Conferma");
+
+        // Aggiungi i componenti al pannello
+        panel.add(labelTendina);
+        panel.add(menuTendina);
+        panel.add(labelTendinaR);
+        panel.add(menuTendinaR);
+        panel.add(label);
+        panel.add(textField);
+        panel.add(labelC);
+        panel.add(textFieldC);
+        panel.add(labelE);
+        panel.add(textFieldE);
+        panel.add(new JLabel()); // Spaziatore per allineamento
+        panel.add(confermaButton);
+
+        // Azione sul bottone di conferma
+        confermaButton.addActionListener(e -> {
+            String selezione = (String) menuTendina.getSelectedItem();
+            String selezioneR = (String) menuTendinaR.getSelectedItem();
+            String selezioneD = (String) menuTendinaD.getSelectedItem();
+            String nomeDipendente = textField.getText();
+            String cognome = textFieldC.getText();
+            String email = textFieldE.getText();
+            if (selezione != null && selezioneR != null && nomeDipendente != null && !nomeDipendente.isEmpty()
+                    && cognome != null && !cognome.isEmpty() && email != null && !email.isEmpty() && selezioneD!= null) {
+
+                Dipendente d = new Dipendente(nomeDipendente, cognome, email);
+                o.modificaD(o.getUnita(selezione).getRuolo(selezioneR).getDipendente(selezioneD),d,o.getUnita(selezione).getRuolo(selezioneR),o.getUnita(selezione));
+                JOptionPane.showMessageDialog(this, "Dipendente aggiunto: " + d.toString());
+                aggiungiDipendente.dispose(); // Chiudi il dialogo
+            } else {
+                JOptionPane.showMessageDialog(this, "Inserisci tutti i campi richiesti.", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        aggiungiDipendente.add(panel);
+        aggiungiDipendente.setVisible(true);
+    }
+    private void apriDialogoModificaR() {
+        JDialog rimuoviRuolo = new JDialog(this, "Modifica Ruolo", true);
+        rimuoviRuolo.setSize(300, 200);
+        rimuoviRuolo.setLocationRelativeTo(this);
+
+        // Pannello principale del dialogo
+        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
+
+        // Etichetta e menu a tendina
+        JLabel labelTendina = new JLabel("Seleziona Unita");
+        String[] opzioni = o.getNomiUnita(); // Recupera i nomi delle unità
+        JComboBox<String> menuTendina = new JComboBox<>(opzioni);
+
+        JLabel labelTendinaR = new JLabel("Seleziona Ruolo:");
+        JComboBox<String> menuTendinaR = new JComboBox<>();
+
+        // Aggiorna i ruoli in base all'unità selezionata
+        menuTendina.addActionListener(e -> {
+            String selezioneUnita = (String) menuTendina.getSelectedItem();
+            if (selezioneUnita != null) {
+                String[] ruoli = o.getUnita(selezioneUnita).getRuoli().keySet().toArray(new String[0]);
+                menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoli));
+            }
+        });
+
+        // Imposta i ruoli iniziali per l'unità predefinita
+        if (opzioni.length > 0) {
+            String unitaIniziale = opzioni[0];
+            String[] ruoliIniziali = o.getUnita(unitaIniziale).getRuoli().keySet().toArray(new String[0]);
+            menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoliIniziali));
+        }
+        JLabel label = new JLabel("Inserisci nome Ruolo:");
+        JTextField textField = new JTextField();
+        // Bottone di conferma
+        JButton confermaButton = new JButton("Conferma");
+
+        // Aggiungi i componenti al pannello
+        panel.add(labelTendina);
+        panel.add(menuTendina);
+        panel.add(labelTendinaR);
+        panel.add(menuTendinaR);
+        panel.add(label);
+        panel.add(textField);
+        panel.add(new JLabel()); // Spaziatore per allineamento
+        panel.add(confermaButton);
+
+        // Azione sul bottone di conferma
+        confermaButton.addActionListener(e -> {
+            String selezione = (String) menuTendina.getSelectedItem();
+            String selezioneR = (String) menuTendinaR.getSelectedItem();
+
+            if (selezione != null && selezioneR != null) {
+                o.modificaR(o.getUnitaDb().get(selezione).getRuolo(selezioneR),new Ruolo(textField.getText()),o.getUnitaDb().get(selezione));
+                JOptionPane.showMessageDialog(this, "Ruolo rimosso ");
+                rimuoviRuolo.dispose(); // Chiudi il dialogo
+            } else {
+                JOptionPane.showMessageDialog(this, "Inserisci un nome valido per il ruolo.", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        rimuoviRuolo.add(panel);
+        rimuoviRuolo.setVisible(true);
+    }
 }

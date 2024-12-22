@@ -10,11 +10,11 @@ import java.util.List;
 public class UnitaComposite implements Unita {
     private static final long serialVersionUID = 1L;
     private String nome;
-    private Unita padre;
+    private String padre;
     private HashMap<String,Ruolo>ruoli;
     private List<Unita> sottoUnita;
 
-    public UnitaComposite(String nome,Unita padre){
+    public UnitaComposite(String nome,String padre){
         this.nome=nome;
         this.padre=padre;
         ruoli=new HashMap<>();
@@ -41,12 +41,12 @@ public class UnitaComposite implements Unita {
     }
 
     @Override
-    public void setPadre(Unita u) {
+    public void setPadre(String u) {
         this.padre=u;
     }
 
     @Override
-    public Unita getPadre() {
+    public String getPadre() {
         return padre;
     }
 
@@ -90,5 +90,9 @@ public class UnitaComposite implements Unita {
         if(!ruoli.containsKey(r.getNome()))
             throw new IllegalArgumentException("Ruolo non Trovato");
         return r.getDipendenti();
+    }
+    public void copiaStato(Unita u){
+        this.sottoUnita=u.getSottoUnita();
+        this.ruoli=u.getRuoli();
     }
 }
