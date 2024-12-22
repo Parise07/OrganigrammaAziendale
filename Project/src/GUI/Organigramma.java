@@ -138,14 +138,15 @@ public class Organigramma implements Serializable {
         unita.modifica(u,nuova);
     }
     public void modificaD(Dipendente vecchio, Dipendente nuovo, Ruolo r, Unita u){
-            if(vecchio.getEmail()!= nuovo.getEmail()){
+            if(!vecchio.getEmail().equals(nuovo.getEmail())){
                 this.removeDipendente(u,r,vecchio);
                 this.aggiungiDipendente(nuovo,u,r);
+            }else{
+                this.aggiungiDipendente(nuovo,u,r);
             }
-        this.aggiungiDipendente(nuovo,u,r);
     }
     public void modificaR(Ruolo vecchio, Ruolo nuovo,Unita u){
-        if(vecchio.getNome()!= nuovo.getNome()){
+        if(!vecchio.getNome().equals(nuovo.getNome())){
             this.removeRuolo(u,vecchio);
             this.aggiungiRuolo(nuovo,u);
             nuovo.setState(vecchio);

@@ -20,7 +20,6 @@ public class Caretaker implements Serializable {
             Memento primo = storico.removeFirst(); // Rimuove il primo elemento salvato (FIFO)
             redoList.addFirst(primo); // Lo sposta nella coda di redo
             Memento secondo =storico.getFirst();
-            redoList.addFirst(secondo);
             System.out.println("Ripristino dello stato...");
             return secondo;
         }
@@ -33,10 +32,8 @@ public class Caretaker implements Serializable {
         if (!redoList.isEmpty()) {
             Memento primo = redoList.removeFirst(); // Rimuove il primo elemento salvato (FIFO)
             storico.addFirst(primo); // Lo sposta nella coda di redo
-            Memento secondo =redoList.getFirst();
-            storico.addFirst(secondo);
             System.out.println("Ripristino dello stato...");
-            return secondo;
+            return primo;
         }
         System.out.println("Nessuno stato da ripristinare.");
         return null;

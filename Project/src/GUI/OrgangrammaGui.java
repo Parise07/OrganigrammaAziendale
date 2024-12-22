@@ -13,14 +13,17 @@ public class OrgangrammaGui extends JFrame {
 
     public OrgangrammaGui() {
         setTitle("Organigramma");
-        setSize(300,300);
+        setSize(300,200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.BLACK);
         setLocationRelativeTo(null);
 
         JButton caricaButton= new JButton("Carica");
         JButton creaButton= new JButton("Nuovo");
-
+        caricaButton.setBackground(Color.GREEN);
+        creaButton.setBackground(Color.GREEN);
         JPanel panel= new JPanel();
+        panel.setBackground(Color.darkGray);
         panel.add(caricaButton);
         panel.add(creaButton);
         add(panel);

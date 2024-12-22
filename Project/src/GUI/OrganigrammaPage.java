@@ -55,12 +55,10 @@ public class OrganigrammaPage extends JFrame {
     public JPanel raffiguraOrganigramma() {
         // Creazione del pannello principale
         JPanel organigrammaPanel = new JPanel(new BorderLayout());
-        organigrammaPanel.setBackground(Color.LIGHT_GRAY);
 
         // Disabilita il layout automatico predefinito
         graph.setAutoSizeCells(true);
         graph.getModel().beginUpdate();
-
         try {
             // Costruzione ricorsiva del grafo
             buildGraph(o.getRadice(), null);
@@ -121,6 +119,7 @@ public class OrganigrammaPage extends JFrame {
         JButton removeD = new JButton("Remove Dipendente");
         JButton modificaU = new JButton("Modifica Unita");
         JButton info=new JButton("Info");
+        gruppiPanel.setBackground(Color.ORANGE);
         // Aggiungi i pulsanti ai gruppi
         gruppiPanel.add(aggiungiU);
         gruppiPanel.add(aggiungiR);
@@ -135,6 +134,7 @@ public class OrganigrammaPage extends JFrame {
 
         // Pannello per il pulsante "Salva"
         JPanel salvaPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        salvaPanel.setBackground(Color.ORANGE);
         JButton salvaButton = new JButton("Salva");
         JButton redoButton = new JButton("Redo");
         JButton undoButton = new JButton("Undo");
@@ -154,6 +154,9 @@ public class OrganigrammaPage extends JFrame {
                 aggiornaGrafico();
             }
         });
+        undoButton.setBackground(Color.BLUE);
+        redoButton.setBackground(Color.BLUE);
+        salvaButton.setBackground(Color.BLUE);
         salvaPanel.add(undoButton);
         salvaPanel.add(redoButton);
         salvaPanel.add(salvaButton);
@@ -803,7 +806,7 @@ public class OrganigrammaPage extends JFrame {
         rimuoviRuolo.setLocationRelativeTo(this);
 
         // Pannello principale del dialogo
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10)); // Spaziatura tra i componenti
 
         // Etichetta e menu a tendina
         JLabel labelTendina = new JLabel("Seleziona Unita");
