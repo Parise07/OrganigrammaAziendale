@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>3</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
-      <y>340</y>
-      <w>360</w>
-      <h>130</h>
+      <x>207</x>
+      <y>102</y>
+      <w>108</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>	Dipendente
 --
@@ -24,10 +24,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>320</y>
-      <w>330</w>
-      <h>190</h>
+      <x>360</x>
+      <y>96</y>
+      <w>99</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Ruolo	
 --
@@ -46,9 +46,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>240</x>
-      <y>570</y>
-      <w>330</w>
-      <h>260</h>
+      <y>171</y>
+      <w>99</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>DipendentiDB
 --
@@ -72,10 +72,10 @@ _-istanzaDipendente:DipendenteDB_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>460</y>
-      <w>30</w>
-      <h>130</h>
+      <x>258</x>
+      <y>138</y>
+      <w>9</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
@@ -83,10 +83,10 @@ _-istanzaDipendente:DipendenteDB_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>710</x>
-      <y>600</y>
-      <w>290</w>
-      <h>260</h>
+      <x>381</x>
+      <y>180</y>
+      <w>87</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>RuoloDb
 --
@@ -111,36 +111,21 @@ _-istanzaRuolo:RuoloDB_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>780</x>
-      <y>500</y>
-      <w>30</w>
-      <h>120</h>
+      <x>402</x>
+      <y>150</y>
+      <w>9</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1100</x>
-      <y>980</y>
-      <w>190</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>pattern observer
-per notificare 
-eventuali modifiche
-dei componenti  
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1140</x>
-      <y>270</y>
-      <w>360</w>
-      <h>310</h>
+      <x>510</x>
+      <y>81</y>
+      <w>108</w>
+      <h>93</h>
     </coordinates>
     <panel_attributes>UnitaComposite
 --
@@ -167,10 +152,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>930</x>
-      <y>10</y>
-      <w>140</w>
-      <h>70</h>
+      <x>447</x>
+      <y>3</y>
+      <w>42</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>applicare composete
 per la struttra 
@@ -181,10 +166,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1060</x>
-      <y>50</y>
-      <w>340</w>
-      <h>30</h>
+      <x>486</x>
+      <y>15</y>
+      <w>102</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>320.0;10.0;10.0;10.0</additional_attributes>
@@ -192,10 +177,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1220</x>
-      <y>620</y>
-      <w>270</w>
-      <h>290</h>
+      <x>534</x>
+      <y>198</y>
+      <w>81</w>
+      <h>87</h>
     </coordinates>
     <panel_attributes>UnitaDb
 --
@@ -221,21 +206,21 @@ _-istanzaUnita:UnitaDB_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1280</x>
-      <y>570</y>
-      <w>30</w>
-      <h>70</h>
+      <x>552</x>
+      <y>171</y>
+      <w>9</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>380</y>
-      <w>180</w>
-      <h>40</h>
+      <x>312</x>
+      <y>114</y>
+      <w>54</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -245,10 +230,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>470</y>
-      <w>200</w>
-      <h>40</h>
+      <x>456</x>
+      <y>141</y>
+      <w>60</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -258,10 +243,10 @@ m2=1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>0</x>
-      <y>630</y>
-      <w>140</w>
-      <h>140</h>
+      <x>168</x>
+      <y>189</y>
+      <w>42</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>applico il pattern
 singleton poichè 
@@ -277,10 +262,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>130</x>
-      <y>660</y>
-      <w>130</w>
-      <h>30</h>
+      <x>207</x>
+      <y>198</y>
+      <w>39</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
@@ -288,10 +273,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1380</x>
+      <x>582</x>
       <y>0</y>
-      <w>360</w>
-      <h>210</h>
+      <w>108</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Unita
@@ -310,10 +295,10 @@ Unita
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1070</x>
-      <y>100</y>
-      <w>330</w>
-      <h>300</h>
+      <x>489</x>
+      <y>30</y>
+      <w>99</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>cildren
 lt=&lt;&lt;&lt;&lt;-&gt;
@@ -323,10 +308,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1280</x>
-      <y>200</y>
-      <w>210</w>
-      <h>90</h>
+      <x>552</x>
+      <y>60</y>
+      <w>63</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>190.0;10.0;190.0;60.0;10.0;60.0;10.0;70.0</additional_attributes>
@@ -334,10 +319,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1460</x>
-      <y>200</y>
-      <w>270</w>
-      <h>150</h>
+      <x>606</x>
+      <y>60</y>
+      <w>81</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0;250.0;60.0;250.0;130.0</additional_attributes>
@@ -345,10 +330,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1580</x>
-      <y>330</y>
-      <w>360</w>
-      <h>270</h>
+      <x>642</x>
+      <y>99</y>
+      <w>108</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>UnitaFoglia
 --
@@ -373,10 +358,10 @@ lt=&lt;&lt;&lt;&lt;-&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
-      <y>940</y>
-      <w>270</w>
-      <h>200</h>
+      <x>384</x>
+      <y>282</y>
+      <w>81</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 DB
@@ -394,21 +379,10 @@ DB
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>980</x>
-      <y>1010</y>
-      <w>140</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>820</y>
-      <w>390</w>
-      <h>140</h>
+      <x>300</x>
+      <y>246</y>
+      <w>117</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>370.0;120.0;370.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
@@ -416,21 +390,21 @@ DB
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>880</y>
-      <w>450</w>
-      <h>80</h>
+      <x>408</x>
+      <y>264</y>
+      <w>132</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0;430.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0;420.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>850</y>
-      <w>30</w>
-      <h>110</h>
+      <x>408</x>
+      <y>255</y>
+      <w>9</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -438,10 +412,10 @@ DB
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>950</y>
-      <w>210</w>
-      <h>190</h>
+      <x>267</x>
+      <y>285</y>
+      <w>63</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 Observer
@@ -452,10 +426,10 @@ Observer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>1010</y>
-      <w>210</w>
-      <h>40</h>
+      <x>327</x>
+      <y>303</y>
+      <w>63</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 observers</panel_attributes>
@@ -464,10 +438,10 @@ observers</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>1130</y>
-      <w>30</w>
-      <h>120</h>
+      <x>291</x>
+      <y>339</y>
+      <w>9</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -475,10 +449,10 @@ observers</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>1230</y>
-      <w>210</w>
-      <h>190</h>
+      <x>264</x>
+      <y>369</y>
+      <w>63</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>ObserverConcreto
 --
@@ -490,10 +464,10 @@ observers</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>930</y>
-      <w>70</w>
-      <h>70</h>
+      <x>450</x>
+      <y>279</y>
+      <w>21</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0;50.0;50.0;50.0;10.0</additional_attributes>
@@ -501,89 +475,80 @@ observers</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>1240</y>
-      <w>210</w>
-      <h>190</h>
+      <x>378</x>
+      <y>372</y>
+      <w>132</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Organigramma
 --
--radice:Unita
+-observer:ObserverConcreto
+-unita:UnitaDB
+-ruoli:RuoloDB
+-dipendenti:DipendentiDB
+-file:Originator
+-filePath:String
 --
-+getRadice()
-+getOrganigramma()
-+getRuoli(Unita)
-+getDipendenti(Ruolo)
-+aggiornaDipendenti()
-+aggiornaUnita()
-+aggiornaRuoli()</panel_attributes>
++Organigramma(filePath:String)
++Organigramma(u:Unita)
++setFilePath(file:String)
++getRadice():Unita
++aggiungiDipendente(d:Dipendente,u:Unita,r:Ruolo)
++aggiungiRuolo(r:Ruolo,u:Unita)
++aggiungiUnita(u:Unita,padre:String)
++getNomiUnita():String[]
++removeDipendente(u:Unita,r:Ruolo,d:Dipendente)
++removeRuolo(u:Unita,r:Ruolo)
++removeUnita(u:Unita)
++salvaOrganigramma()
++caricaOrganigramma()
++registraObserver()
++getUnitaDb():UnitaDB
++getUnita(String nome):Unita
++redo()
++undo()
++modificaU(u:Unita,nuova:String)
++modificaD(vecchio:Dipendente,nuovo:Dipendente,r:Ruolo,u:Unita)
++ModificaR(vecchioRuolo,nuovo:Ruolo,u:Unita)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1280</x>
-      <y>1120</y>
-      <w>700</w>
-      <h>320</h>
+      <x>552</x>
+      <y>336</y>
+      <w>210</w>
+      <h>96</h>
     </coordinates>
-    <panel_attributes>File
+    <panel_attributes>Originator
 --
-+mapUnita:HashMap&lt;String,Unita&gt;
-+observerUnita:LinkedList&lt;Observer&gt;
-+mapRuoli:HashMap&lt;String,Ruolo&gt;
-+observerRuoli:LinkedList&lt;Observer&gt;
-+mapDipendenti:HashMap&lt;String,Dipendente&gt;
-+observerDipendenti:LinkedList&lt;Observer&gt;
+-unitaMap:HashMap&lt;String,Unita&gt;
+-ruoliMap:HashMap&lt;String,Ruolo&gt;
+-dipendentiMap:HashMap&lt;String,Dipendente&gt;
+-radice:String
+-c:Caretaker
 --
-+File(file;File)
++setStato(o:Originator)
 +getMapUnita()HashMap&lt;String,Unita&gt;
-+setUnita(map:HashMap&lt;String,Unita&gt;,observerUnita:LinkedList&lt;Observer&gt;,radice:Unita)
 +getMapRuolo()HashMap&lt;String,Ruolo&gt;
-+setUnita(mapRuolo:HashMap&lt;String,Ruolo&gt;,observerRuolo:LinkedList&lt;Observer&gt;)
 +getMapDipendente()HashMapDipendente&lt;String,Dipendente&gt;
++setUnita(map:HashMap&lt;String,Unita&gt;,observerUnita:LinkedList&lt;Observer&gt;,radice:Unita)
++setRuoloMap(mapRuolo:HashMap&lt;String,Ruolo&gt;,observerRuolo:LinkedList&lt;Observer&gt;)
 +setDipendente(mapDipendente:HashMap&lt;String,Dipendente&gt;,observerDipendente:LinkedList&lt;Observer&gt;)
-+getObserverUnita():LinkedList&lt;Observer&gt;
-+getObserverRuoli():LinkedList&lt;Observer&gt;
-+getObserverDipendente():LinkedList&lt;Observer&gt;
-+getRadice():Unita</panel_attributes>
++getRadice():Unita
++setRadice(radice:String)
++save()
++restore()
++redo()</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1790</x>
-      <y>1000</y>
-      <w>140</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>Questa classe serve 
-alla memorizzazione su 
-file delle strutture presenti 
-nel DB, e per poterle
-recuperare senza violare 
-la logica del singleton
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1750</x>
-      <y>1030</y>
-      <w>60</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;90.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>960</x>
-      <y>940</y>
-      <w>30</w>
-      <h>30</h>
+      <x>456</x>
+      <y>282</y>
+      <w>9</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>E
 style=wordwrap</panel_attributes>
@@ -592,10 +557,10 @@ style=wordwrap</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1590</x>
-      <y>1430</y>
-      <w>30</w>
-      <h>130</h>
+      <x>645</x>
+      <y>429</y>
+      <w>9</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
@@ -603,45 +568,162 @@ style=wordwrap</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1500</x>
-      <y>1540</y>
-      <w>210</w>
-      <h>110</h>
+      <x>579</x>
+      <y>462</y>
+      <w>150</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>Memento
 --
--stato:File
+-unitaMap:HashMap&lt;String,Unita&gt;
+-ruoliMap:HashMap&lt;String,Ruolo&gt;
+-dipendentiMap:HashMap&lt;String,Dipendente&gt;
+-radice:String
 --
-+Memento(stato:File)
-+getStato():File</panel_attributes>
++Memento(o:Originator)
++getMapUnita()HashMap&lt;String,Unita&gt;
++getMapRuolo()HashMap&lt;String,Ruolo&gt;
++getMapDipendente()HashMapDipendente&lt;String,Dipendente&gt;
++getRadice():Unita
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1600</x>
-      <y>1640</y>
-      <w>30</w>
-      <h>100</h>
+      <x>648</x>
+      <y>534</y>
+      <w>9</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1520</x>
-      <y>1720</y>
-      <w>210</w>
-      <h>100</h>
+      <x>624</x>
+      <y>576</y>
+      <w>63</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>Caretaker
 --
--storico:Stack&lt;Memento&gt;
+-storico:LinkedList&lt;Memento
+-redoList:LinkedList&lt;Memento&gt;
 --
 +salva(m:Memento)
 +ripristina():Memento
++redo():Memento
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>393</y>
+      <w>60</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>507</x>
+      <y>396</y>
+      <w>51</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>447</x>
+      <y>339</y>
+      <w>15</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>549</y>
+      <w>123</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>OrganigrammaPage
+--
+-o:Organigramma
+-graph:mxGraph
+-parent:Object
+--
++OrganigrammaPage(pathFile:String)
++OrganigrammaPage(radice:Unita)
++page()
++raffiguraOrganigramma():JPanel
+-buildGraph(unita:Unita,parentCell:Object)
+-aggiornaGrafico()
++bottoni():JPanel
+-apriDialogoAggiungiUnita()
+-apriDialogoAggiungiR()
+-apriDialogoAggiungiD()
+-apriDialogoRemoveUnita()
+-apriDialogoRemoveR()
+-apriDialogoRemoveD()
+-apriDialogoSalva()
+-bottoniPerUnita()
+-apriDialogoModificaU()
+-apriDialogoModificaR()
+-apriDialogoModificaR()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>513</y>
+      <w>9</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>222</x>
+      <y>507</y>
+      <w>63</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>OrganigrammaGui
+--
++OrganigrammaGui()
+-apriPopupInserimento()
+_+main(args:String[])_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>282</x>
+      <y>519</y>
+      <w>102</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;170.0;320.0;190.0</additional_attributes>
   </element>
 </diagram>

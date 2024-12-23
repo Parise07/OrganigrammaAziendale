@@ -671,11 +671,11 @@ public class OrganigrammaPage extends JFrame {
             JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
 
             // Etichetta e menu a tendina
-            JLabel labelTendina = new JLabel("Seleziona padre:");
+            JLabel labelTendina = new JLabel("Seleziona Unita :");
             String[] opzioni = o.getNomiUnita();
             JComboBox<String> menuTendina = new JComboBox<>(opzioni);
 
-            JLabel label = new JLabel("Inserisci nome Unita:");
+            JLabel label = new JLabel("Inserisci nuovo nome :");
             JTextField textField = new JTextField();
 
             // Bottone di conferma
@@ -711,15 +711,15 @@ public class OrganigrammaPage extends JFrame {
 
     }
     private void apriDialogoModificaD() {
-        JDialog aggiungiDipendente = new JDialog(this, "Aggiungi Dipendente", true);
-        aggiungiDipendente.setSize(600, 200);
+        JDialog aggiungiDipendente = new JDialog(this, "Modifica Dipendente", true);
+        aggiungiDipendente.setSize(600, 300);
         aggiungiDipendente.setLocationRelativeTo(this);
 
         // Pannello principale del dialogo
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10)); // Spaziatura tra i componenti
 
         // Etichetta e menu a tendina per le unità
-        JLabel labelTendina = new JLabel("Seleziona Unità:");
+        JLabel labelTendina = new JLabel("Seleziona Unita:");
         String[] opzioni = o.getNomiUnita(); // Recupera i nomi delle unità
         JComboBox<String> menuTendina = new JComboBox<>(opzioni);
 
@@ -727,30 +727,9 @@ public class OrganigrammaPage extends JFrame {
         JLabel labelTendinaR = new JLabel("Seleziona Ruolo:");
         JComboBox<String> menuTendinaR = new JComboBox<>();
 
+        // Etichetta e menu a tendina per i dipendenti
         JLabel labelTendinaD = new JLabel("Seleziona Dipendente:");
         JComboBox<String> menuTendinaD = new JComboBox<>();
-
-        // Aggiorna i ruoli in base all'unità selezionata
-        menuTendina.addActionListener(e -> {
-            String selezioneUnita = (String) menuTendina.getSelectedItem();
-            if (selezioneUnita != null) {
-                String[] ruoli = o.getUnita(selezioneUnita).getRuoli().keySet().toArray(new String[0]);
-                menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoli));
-                String selezioneRuolo = (String) menuTendinaR.getSelectedItem();
-                if (selezioneRuolo != null) {
-                    String[] dipendenti = o.getUnita(selezioneUnita).getRuolo(selezioneRuolo).getDipendenti().keySet().toArray(new String[0]);
-                    menuTendinaD.setModel(new DefaultComboBoxModel<>(dipendenti));
-                }
-            }
-        });
-
-        // Imposta i ruoli iniziali per l'unità predefinita
-        if (opzioni.length > 0) {
-            String unitaIniziale = opzioni[0];
-            String[] ruoliIniziali = o.getUnita(unitaIniziale).getRuoli().keySet().toArray(new String[0]);
-            String[] dipendenti = o.getUnita(unitaIniziale).getRuolo(ruoliIniziali[0]).getDipendenti().keySet().toArray(new String[0]);
-            menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoliIniziali));
-        }
 
         // Altri campi di input
         JLabel label = new JLabel("Inserisci nome Dipendente:");
@@ -763,11 +742,52 @@ public class OrganigrammaPage extends JFrame {
         // Bottone di conferma
         JButton confermaButton = new JButton("Conferma");
 
+        // Aggiorna i ruoli e i dipendenti in base all'unità selezionata
+        menuTendina.addActionListener(e -> {
+            String selezioneUnita = (String) menuTendina.getSelectedItem();
+            if (selezioneUnita != null) {
+                String[] ruoli = o.getUnita(selezioneUnita).getRuoli().keySet().toArray(new String[0]);
+                menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoli));
+
+                if (ruoli.length > 0) {
+                    String selezioneRuolo = ruoli[0];
+                    String[] dipendenti = o.getUnita(selezioneUnita).getRuolo(selezioneRuolo).getDipendenti().keySet().toArray(new String[0]);
+                    menuTendinaD.setModel(new DefaultComboBoxModel<>(dipendenti));
+                } else {
+                    menuTendinaD.setModel(new DefaultComboBoxModel<>(new String[0]));
+                }
+            }
+        });
+
+        // Aggiorna i dipendenti in base al ruolo selezionato
+        menuTendinaR.addActionListener(e -> {
+            String selezioneUnita = (String) menuTendina.getSelectedItem();
+            String selezioneRuolo = (String) menuTendinaR.getSelectedItem();
+            if (selezioneUnita != null && selezioneRuolo != null) {
+                String[] dipendenti = o.getUnita(selezioneUnita).getRuolo(selezioneRuolo).getDipendenti().keySet().toArray(new String[0]);
+                menuTendinaD.setModel(new DefaultComboBoxModel<>(dipendenti));
+            }
+        });
+
+        // Imposta i ruoli e i dipendenti iniziali per l'unità predefinita
+        if (opzioni.length > 0) {
+            String unitaIniziale = opzioni[0];
+            String[] ruoliIniziali = o.getUnita(unitaIniziale).getRuoli().keySet().toArray(new String[0]);
+            menuTendinaR.setModel(new DefaultComboBoxModel<>(ruoliIniziali));
+
+            if (ruoliIniziali.length > 0) {
+                String[] dipendentiIniziali = o.getUnita(unitaIniziale).getRuolo(ruoliIniziali[0]).getDipendenti().keySet().toArray(new String[0]);
+                menuTendinaD.setModel(new DefaultComboBoxModel<>(dipendentiIniziali));
+            }
+        }
+
         // Aggiungi i componenti al pannello
         panel.add(labelTendina);
         panel.add(menuTendina);
         panel.add(labelTendinaR);
         panel.add(menuTendinaR);
+        panel.add(labelTendinaD);
+        panel.add(menuTendinaD);
         panel.add(label);
         panel.add(textField);
         panel.add(labelC);
@@ -779,19 +799,22 @@ public class OrganigrammaPage extends JFrame {
 
         // Azione sul bottone di conferma
         confermaButton.addActionListener(e -> {
-            String selezione = (String) menuTendina.getSelectedItem();
-            String selezioneR = (String) menuTendinaR.getSelectedItem();
-            String selezioneD = (String) menuTendinaD.getSelectedItem();
-            String nomeDipendente = textField.getText();
-            String cognome = textFieldC.getText();
-            String email = textFieldE.getText();
-            if (selezione != null && selezioneR != null && nomeDipendente != null && !nomeDipendente.isEmpty()
-                    && cognome != null && !cognome.isEmpty() && email != null && !email.isEmpty() && selezioneD!= null) {
+            String selezioneUnita = (String) menuTendina.getSelectedItem();
+            String selezioneRuolo = (String) menuTendinaR.getSelectedItem();
+            String selezioneDipendente = (String) menuTendinaD.getSelectedItem();
+            String nomeDipendente = textField.getText().trim();
+            String cognome = textFieldC.getText().trim();
+            String email = textFieldE.getText().trim();
+
+            if (selezioneUnita != null && selezioneRuolo != null && selezioneDipendente != null
+                    && !nomeDipendente.isEmpty() && !cognome.isEmpty() && !email.isEmpty()) {
 
                 Dipendente d = new Dipendente(nomeDipendente, cognome, email);
-                o.modificaD(o.getUnita(selezione).getRuolo(selezioneR).getDipendente(selezioneD),d,o.getUnita(selezione).getRuolo(selezioneR),o.getUnita(selezione));
-                JOptionPane.showMessageDialog(this, "Dipendente aggiunto: " + d.toString());
-                aggiungiDipendente.dispose(); // Chiudi il dialogo
+                o.modificaD(o.getUnita(selezioneUnita).getRuolo(selezioneRuolo).getDipendente(selezioneDipendente), d,
+                        o.getUnita(selezioneUnita).getRuolo(selezioneRuolo), o.getUnita(selezioneUnita));
+
+                JOptionPane.showMessageDialog(this, "Dipendente modificato: " + d.toString());
+                aggiungiDipendente.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Inserisci tutti i campi richiesti.", "Errore", JOptionPane.ERROR_MESSAGE);
             }
@@ -800,6 +823,7 @@ public class OrganigrammaPage extends JFrame {
         aggiungiDipendente.add(panel);
         aggiungiDipendente.setVisible(true);
     }
+
     private void apriDialogoModificaR() {
         JDialog rimuoviRuolo = new JDialog(this, "Modifica Ruolo", true);
         rimuoviRuolo.setSize(300, 200);

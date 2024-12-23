@@ -25,31 +25,19 @@ public class Memento implements Serializable {
         return unitaMap;
     }
 
-    public void setUnitaMap(HashMap<String, Unita> unitaMap) {
-        this.unitaMap = unitaMap;
-    }
 
     public HashMap<String, Dipendente> getDipendentiMap() {
         return dipendentiMap;
     }
 
-    public void setDipendentiMap(HashMap<String, Dipendente> dipendentiMap) {
-        this.dipendentiMap = dipendentiMap;
-    }
 
     public HashMap<String, Ruolo> getRuoloMap() {
         return ruoloMap;
     }
 
-    public void setRuoloMap(HashMap<String, Ruolo> ruoloMap) {
-        this.ruoloMap = ruoloMap;
-    }
 
     public String getRadice() {
         return radice;
     }
 
-    public void setRadice(String radice) {
-        this.radice = radice;
-    }
 }

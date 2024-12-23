@@ -34,7 +34,6 @@ public class OrgangrammaGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser sceltaFile= new JFileChooser();
                 sceltaFile.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                sceltaFile.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("File Organigramma (*.bin)", "bin"));
                 int result = sceltaFile.showOpenDialog(OrgangrammaGui.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File fileSelezionato = sceltaFile.getSelectedFile();
