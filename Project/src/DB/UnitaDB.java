@@ -112,4 +112,8 @@ public class UnitaDB implements DB<Unita>{
             this.remove(u);
         }
     }
+
+    public boolean contains(String u){
+        return unita.containsKey(u);
+    }
 }

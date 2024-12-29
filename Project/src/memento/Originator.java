@@ -8,21 +8,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Originator implements Serializable {
-    private HashMap<String, Unita> unitaMap=new HashMap<>();
-    private HashMap<String, Ruolo>ruoloMap=new HashMap<>();
-    private HashMap<String, Dipendente>dipendentiMap=new HashMap<>();
+    private HashMap<String, Unita> unitaMap = new HashMap<>();
+    private HashMap<String, Ruolo> ruoloMap = new HashMap<>();
+    private HashMap<String, Dipendente> dipendentiMap = new HashMap<>();
     private String radice;
-    private final Caretaker c=new Caretaker();
+    private final Caretaker caretaker = new Caretaker(); // Collegamento al Caretaker
 
-
-    public void setStato(Originator o){
-        this.unitaMap=o.getUnitaMap();
-        this.radice=o.getRadice();
-        this.ruoloMap=o.getRuoloMap();
-        this.dipendentiMap=o.getDipendentiMap();
-        save();
+    // Metodo per impostare lo stato
+    public void setStato(Originator stato) {
+        this.unitaMap = new HashMap<>(stato.getUnitaMap());
+        this.ruoloMap = new HashMap<>(stato.getRuoloMap());
+        this.dipendentiMap = new HashMap<>(stato.getDipendentiMap());
+        this.radice = stato.getRadice();
+        save(); // Salva lo stato nel Caretaker
     }
 
+    // Getter e Setter
     public HashMap<String, Unita> getUnitaMap() {
         return unitaMap;
     }
@@ -54,25 +55,54 @@ public class Originator implements Serializable {
     public void setRadice(String radice) {
         this.radice = radice;
     }
-    public void save(){
-       c.salva( new Memento(this));
+
+    // Salva lo stato attuale nel Caretaker
+    public void save() {
+        Memento memento = new OriginatorMemento(); // Crea un nuovo Memento
+        caretaker.salva(memento); // Salva il Memento nel Caretaker
     }
-    public void restore(){
-        Memento memento = c.ripristina();
+
+    // Ripristina lo stato dal Caretaker (UNDO)
+    public void undo() {
+        Memento memento = caretaker.ripristina();
         if (memento != null) {
-            this.unitaMap =new HashMap<>( memento.getUnitaMap());
-            this.radice = memento.getRadice();
-            this.ruoloMap =new HashMap<>(memento.getRuoloMap()) ;
-            this.dipendentiMap =new HashMap<>(memento.getDipendentiMap()) ;
+            restore(memento); // Ripristina lo stato dal Memento
         }
     }
-    public void redo(){
-            Memento memento = c.redo();
-            if (memento != null) {
-                this.unitaMap = memento.getUnitaMap();
-                this.radice = memento.getRadice();
-                this.ruoloMap = memento.getRuoloMap();
-                this.dipendentiMap = memento.getDipendentiMap();
-            }
+
+    // Ripristina lo stato dal Caretaker (REDO)
+    public void redo() {
+        Memento memento = caretaker.redo();
+        if (memento != null) {
+            restore(memento); // Ripristina lo stato dal Memento
+        }
+    }
+
+    // Metodo per ripristinare lo stato da un Memento
+    public void restore(Memento memento) {
+        if (!(memento instanceof OriginatorMemento)) {
+            throw new IllegalArgumentException("Memento non valido.");
+        }
+        OriginatorMemento originatorMemento = (OriginatorMemento) memento;
+        this.unitaMap = new HashMap<>(originatorMemento.unitaMap);
+        this.ruoloMap = new HashMap<>(originatorMemento.ruoloMap);
+        this.dipendentiMap = new HashMap<>(originatorMemento.dipendentiMap);
+        this.radice = originatorMemento.radice;
+    }
+
+    // Classe interna per il Memento
+    private class OriginatorMemento implements Serializable, Memento {
+        private final HashMap<String, Unita> unitaMap;
+        private final HashMap<String, Ruolo> ruoloMap;
+        private final HashMap<String, Dipendente> dipendentiMap;
+        private final String radice;
+
+        // Salva lo stato dell'Originator
+        private OriginatorMemento() {
+            this.unitaMap = new HashMap<>(Originator.this.unitaMap);
+            this.ruoloMap = new HashMap<>(Originator.this.ruoloMap);
+            this.dipendentiMap = new HashMap<>(Originator.this.dipendentiMap);
+            this.radice = Originator.this.radice;
+        }
     }
 }

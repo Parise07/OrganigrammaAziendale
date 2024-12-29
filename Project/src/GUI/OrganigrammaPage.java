@@ -214,7 +214,7 @@ public class OrganigrammaPage extends JFrame {
             String selezione = (String) menuTendina.getSelectedItem();
             String nomeUnita = textField.getText();
 
-            if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty()) {
+            if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty() && !o.getUnitaDb().contains(nomeUnita)) {
                 Unita u = new UnitaComposite(nomeUnita, selezione);
                 o.aggiungiUnita(u, selezione);
                 aggiornaGrafico();
@@ -232,14 +232,14 @@ public class OrganigrammaPage extends JFrame {
 
     private void apriDialogoAggiungiR() {
         JDialog aggiungiRuolo = new JDialog(this, "Aggiungi Ruolo", true);
-        aggiungiRuolo.setSize(300, 200);
+        aggiungiRuolo.setSize(400, 200);
         aggiungiRuolo.setLocationRelativeTo(this);
 
         // Pannello principale del dialogo
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10)); // Spaziatura tra i componenti
 
         // Etichetta e menu a tendina
-        JLabel labelTendina = new JLabel("Seleziona padre:");
+        JLabel labelTendina = new JLabel("Seleziona Unità appartenenza :");
         String[] opzioni = o.getNomiUnita(); // Recupera i nomi delle unità
         JComboBox<String> menuTendina = new JComboBox<>(opzioni);
 
@@ -374,7 +374,7 @@ public class OrganigrammaPage extends JFrame {
         confermaButton.addActionListener(e -> {
             String selezione = (String) menuTendina.getSelectedItem();
 
-            if (selezione != null) {
+            if (selezione != null && selezione.equals(o.getRadice())) {
                 o.removeUnita(o.getUnitaDb().get(selezione));
                 aggiornaGrafico();
                 JOptionPane.showMessageDialog(this, "Unità rimossa.");
@@ -694,7 +694,7 @@ public class OrganigrammaPage extends JFrame {
                 String selezione = (String) menuTendina.getSelectedItem();
                 String nomeUnita = textField.getText();
 
-                if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty()) {
+                if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty() && selezione.equals(o.getRadice())) {
                     Unita vecchia= o.getUnita(selezione);
                     o.modificaU(vecchia, nomeUnita);
                     aggiornaGrafico();

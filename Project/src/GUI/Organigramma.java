@@ -86,7 +86,6 @@ public class Organigramma implements Serializable {
         }
     }
     public void caricaOrganigramma() {
-
         try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream(filePath))) {
             file.setStato((Originator) oi.readObject());
             observer= new ObserverConcreto(this,file);
@@ -129,7 +128,7 @@ public class Organigramma implements Serializable {
         dipendenti.carica();
     }
     public void undo(){
-        file.restore();
+        file.undo();
         unita.carica();
         ruoli.carica();
         dipendenti.carica();
