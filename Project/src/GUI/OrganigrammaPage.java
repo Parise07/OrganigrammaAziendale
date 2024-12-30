@@ -4,13 +4,10 @@ import composite.Unita;
 import composite.UnitaComposite;
 import utils.Dipendente;
 import utils.Ruolo;
-
 import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.swing.mxGraphComponent;
@@ -588,7 +585,7 @@ public class OrganigrammaPage extends JFrame {
 
         // Sezione per il menu a tendina
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel labelTendina = new JLabel("Seleziona padre:");
+        JLabel labelTendina = new JLabel("Seleziona Unità:");
         topPanel.add(labelTendina);
 
         // Verifica che l'oggetto "o" sia valido
@@ -635,10 +632,14 @@ public class OrganigrammaPage extends JFrame {
             // Costruzione delle informazioni
             StringBuilder informazioniUnita = new StringBuilder();
             for (String r : unita.getRuoli().keySet()) {
-                informazioniUnita.append(r).append(":\n");
-                Ruolo ruolo = unita.getRuolo(r);
-                for (String email : ruolo.getDipendenti().keySet()) {
-                    informazioniUnita.append(" - ").append(ruolo.getDipendente(email).toString()).append("\n");
+                if(o.getRuoloDb().get(r)!=null) {
+                    informazioniUnita.append(r).append(":\n");
+                    Ruolo ruolo = unita.getRuolo(r);
+                    for (String email : ruolo.getDipendenti().keySet()) {
+                        if (o.getDipendentiDb().get(email) != null) {
+                            informazioniUnita.append(" - ").append(ruolo.getDipendente(email).toString()).append("\n");
+                        }
+                    }
                 }
             }
 

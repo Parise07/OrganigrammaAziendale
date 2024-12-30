@@ -26,7 +26,7 @@ public class UnitaDB implements DB<Unita>{
     }
 
     public Unita getRadice(){
-        return unita.get(radice)    ;
+        return unita.get(radice);
     }
 
     public void setRadice(Unita u){

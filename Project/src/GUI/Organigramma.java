@@ -117,6 +117,15 @@ public class Organigramma implements Serializable {
     public UnitaDB getUnitaDb(){
         return unita;
     }
+
+    public RuoloDB getRuoloDb(){
+        return ruoli;
+    }
+    public DipendentiDB getDipendentiDb(){
+        return dipendenti;
+    }
+
+
     public Unita getUnita(String nome){
         return unita.get(nome);
     }
