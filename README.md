@@ -70,3 +70,4 @@ Il software permette anche di aggiungere nuovi ruoli. È possibile specificare i
 ## Requisiti di Sistema
 
 Il software richiede un ambiente Java per funzionare correttamente.
+Inoltre è necessario per la visualizzazione dell'organigramma avere scaricato e aggiunta la libreria jgraphx.
