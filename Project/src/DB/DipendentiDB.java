@@ -5,6 +5,7 @@ import observer.Observer;
 import utils.Dipendente;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class DipendentiDB implements DB<Dipendente>{
     private static final long serialVersionUID = 1L;
@@ -36,13 +37,20 @@ public class DipendentiDB implements DB<Dipendente>{
 
     @Override
     public void salva() {
-        file.setDipendentiMap(dipendenti);
-
+        HashMap<String, Dipendente> deepCopiedDipendenti = new HashMap<>();
+        for (Map.Entry<String, Dipendente> entry : dipendenti.entrySet()) {
+            deepCopiedDipendenti.put(entry.getKey(), entry.getValue().deepCopy());
+        }
+        file.setDipendentiMap(deepCopiedDipendenti);
     }
 
     @Override
     public void carica() {
-        this.dipendenti=file.getDipendentiMap();
+        HashMap<String, Dipendente> loadedDipendenti = file.getDipendentiMap();
+        dipendenti = new HashMap<>();
+        for (Map.Entry<String, Dipendente> entry : loadedDipendenti.entrySet()) {
+            dipendenti.put(entry.getKey(), entry.getValue().deepCopy());
+        }
     }
 
     @Override

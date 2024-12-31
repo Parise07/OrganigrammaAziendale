@@ -83,9 +83,10 @@ public class OrganigrammaPage extends JFrame {
             graph.insertEdge(parent, null, "", parentCell, unitCell);
         }
 
-        for (Unita subUnit : unita.getSottoUnita()) {
-            if(o.getUnita(subUnit.getNome())!=null)
-                buildGraph(subUnit, unitCell);
+        for (String subUnit : unita.getSottoUnita()) {
+            if(o.getUnita(subUnit)!=null){
+                buildGraph(o.getUnita(subUnit), unitCell);
+            }
         }
 
     }
@@ -216,7 +217,7 @@ public class OrganigrammaPage extends JFrame {
                 o.aggiungiUnita(u, selezione);
                 aggiornaGrafico();
 
-                JOptionPane.showMessageDialog(this, "Unità aggiunta: " + u.toString());
+                JOptionPane.showMessageDialog(this, "Unità aggiunta: " + u.getNome());
                 aggiungiUnita.dispose(); // Chiudi il dialogo
             } else {
                 JOptionPane.showMessageDialog(this, "Inserisci un nome valido per l'unità.", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -371,7 +372,7 @@ public class OrganigrammaPage extends JFrame {
         confermaButton.addActionListener(e -> {
             String selezione = (String) menuTendina.getSelectedItem();
 
-            if (selezione != null && selezione.equals(o.getRadice())) {
+            if (selezione != null && ! o.getRadice().getNome().equals(selezione)) {
                 o.removeUnita(o.getUnitaDb().get(selezione));
                 aggiornaGrafico();
                 JOptionPane.showMessageDialog(this, "Unità rimossa.");
@@ -695,7 +696,7 @@ public class OrganigrammaPage extends JFrame {
                 String selezione = (String) menuTendina.getSelectedItem();
                 String nomeUnita = textField.getText();
 
-                if (selezione != null && nomeUnita != null && !nomeUnita.isEmpty() && selezione.equals(o.getRadice())) {
+                if (selezione != null && !nomeUnita.isEmpty() && ! o.getRadice().getNome().equals(selezione)) {
                     Unita vecchia= o.getUnita(selezione);
                     o.modificaU(vecchia, nomeUnita);
                     aggiornaGrafico();

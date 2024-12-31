@@ -2,6 +2,7 @@ package utils;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Ruolo implements Serializable {
@@ -18,7 +19,7 @@ public class Ruolo implements Serializable {
         return nome;
     }
     public void  addDipendente(Dipendente d) {
-        if(dipendenti.containsKey(d.getEmail()))
+        if(dipendenti.containsKey(d.getEmail()) && dipendenti.get(d.getEmail()).equals(d))
             throw new IllegalArgumentException("Dipendente già assegnato al ruolo");
         dipendenti.put(d.getEmail(), d);
     }
@@ -58,5 +59,12 @@ public class Ruolo implements Serializable {
 
     public void setState(Ruolo vecchio) {
         this.dipendenti=vecchio.getDipendenti();
+    }
+    public Ruolo deepCopy() {
+        Ruolo copy = new Ruolo(this.nome);
+        for (Map.Entry<String, Dipendente> entry : this.dipendenti.entrySet()) {
+            copy.dipendenti.put(entry.getKey(), entry.getValue().deepCopy());
+        }
+        return copy;
     }
 }

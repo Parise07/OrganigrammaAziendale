@@ -6,13 +6,14 @@ import utils.Ruolo;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class UnitaComposite implements Unita {
     private static final long serialVersionUID = 1L;
     private String nome;
     private String padre;
     private HashMap<String,Ruolo>ruoli;
-    private List<Unita> sottoUnita;
+    List<String> sottoUnita;
 
     public UnitaComposite(String nome,String padre){
         this.nome=nome;
@@ -27,14 +28,15 @@ public class UnitaComposite implements Unita {
     }
 
     @Override
-    public List<Unita> getSottoUnita() {
+    public List<String> getSottoUnita() {
         return sottoUnita;
     }
-    public void addSottoUnita(Unita u){
+
+    public void addSottoUnita(String u){
         sottoUnita.add(u);
     }
 
-    public void removeSottoUnita(Unita u){
+    public void removeSottoUnita(String u){
         if(!sottoUnita.contains(u))
             throw new IllegalArgumentException("Sotto unità non presente");
         sottoUnita.remove(u);
@@ -91,8 +93,22 @@ public class UnitaComposite implements Unita {
             throw new IllegalArgumentException("Ruolo non Trovato");
         return r.getDipendenti();
     }
+
     public void copiaStato(Unita u){
         this.sottoUnita=u.getSottoUnita();
         this.ruoli=u.getRuoli();
+    }
+
+    public UnitaComposite deepCopy() {
+        UnitaComposite copy = new UnitaComposite(this.nome, this.padre);
+
+        for (Map.Entry<String, Ruolo> entry : this.ruoli.entrySet()) {
+            copy.ruoli.put(entry.getKey(), entry.getValue().deepCopy()); // Assumi che Ruolo abbia un metodo deepCopy()
+        }
+
+        // Copia delle sotto-unità (lista di stringhe)
+        copy.sottoUnita = new LinkedList<>(this.sottoUnita);
+
+        return copy;
     }
 }

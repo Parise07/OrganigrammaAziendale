@@ -5,6 +5,7 @@ import observer.Observer;
 import utils.Ruolo;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class RuoloDB implements DB<Ruolo>{
     private static final long serialVersionUID = 1L;
@@ -38,12 +39,23 @@ public class RuoloDB implements DB<Ruolo>{
 
     @Override
     public void salva() {
-        file.setRuoloMap(ruoli);
+        // Crea una copia profonda dei ruoli
+        HashMap<String, Ruolo> deepCopiedRuoli = new HashMap<>();
+        for (Map.Entry<String, Ruolo> entry : ruoli.entrySet()) {
+            deepCopiedRuoli.put(entry.getKey(), entry.getValue().deepCopy());
+        }
+
+        // Salva la copia profonda nell'Originator
+        file.setRuoloMap(deepCopiedRuoli);
     }
 
     @Override
     public void carica() {
-        this.ruoli=file.getRuoloMap();
+        HashMap<String, Ruolo> loadedRuoli = file.getRuoloMap();
+        this.ruoli = new HashMap<>();
+        for (Map.Entry<String, Ruolo> entry : loadedRuoli.entrySet()) {
+            this.ruoli.put(entry.getKey(), entry.getValue().deepCopy());
+        }
     }
 
     @Override

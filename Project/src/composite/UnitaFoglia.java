@@ -5,6 +5,7 @@ import utils.Ruolo;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class UnitaFoglia implements Unita{
@@ -12,6 +13,7 @@ public class UnitaFoglia implements Unita{
     private String nome;
     private String padre;
     private HashMap<String,Ruolo>ruoli;
+    private List<String> sottoUnita;
 
     public UnitaFoglia(String nome,String padre){
         this.nome=nome;
@@ -25,7 +27,7 @@ public class UnitaFoglia implements Unita{
     }
 
     @Override
-    public List<Unita> getSottoUnita() {
+    public List<String> getSottoUnita() {
         return null;
     }
 
@@ -76,7 +78,7 @@ public class UnitaFoglia implements Unita{
     }
 
     @Override
-    public void addSottoUnita(Unita u) {
+    public void addSottoUnita(String u) {
         return;
     }
 
@@ -86,5 +88,18 @@ public class UnitaFoglia implements Unita{
     }
     public void copiaStato(Unita u){
         this.ruoli=u.getRuoli();
+    }
+    @Override
+    public UnitaComposite deepCopy() {
+        UnitaComposite copy = new UnitaComposite(this.nome, this.padre);
+
+        for (Map.Entry<String, Ruolo> entry : this.ruoli.entrySet()) {
+            copy.getRuoli().put(entry.getKey(), entry.getValue().deepCopy()); // Assumi che Ruolo abbia un metodo deepCopy()
+        }
+
+        // Copia delle sotto-unità (lista di stringhe)
+        copy.sottoUnita = new LinkedList<>(this.sottoUnita);
+
+        return copy;
     }
 }

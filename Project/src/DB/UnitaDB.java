@@ -6,6 +6,7 @@ import memento.Originator;
 import observer.Observer;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class UnitaDB implements DB<Unita>{
@@ -40,7 +41,7 @@ public class UnitaDB implements DB<Unita>{
     }
 
     public void add(Unita u,String padre) {
-        unita.get(padre).addSottoUnita(u);
+        unita.get(padre).addSottoUnita(u.getNome());
         u.setPadre(padre);
         unita.put(u.getNome(),u);
         notifica();
@@ -64,14 +65,22 @@ public class UnitaDB implements DB<Unita>{
 
     @Override
     public void salva() {
-        file.setUnitaMap(unita);
+        HashMap<String, Unita> deepCopiedUnita = new HashMap<>();
+        for (Map.Entry<String, Unita> entry : this.unita.entrySet()) {
+            deepCopiedUnita.put(entry.getKey(), entry.getValue().deepCopy());
+        }
+        file.setUnitaMap(deepCopiedUnita);
         file.setRadice(radice);
     }
 
     @Override
     public void carica() {
-        this.unita=file.getUnitaMap();
-        this.radice=file.getRadice();
+        HashMap<String, Unita> loadedUnita = file.getUnitaMap();
+        this.unita = new HashMap<>();
+        for (Map.Entry<String, Unita> entry : loadedUnita.entrySet()) {
+            this.unita.put(entry.getKey(), entry.getValue().deepCopy());
+        }
+        this.radice = file.getRadice();
     }
     @Override
     public void remove(Unita u) {
@@ -80,7 +89,7 @@ public class UnitaDB implements DB<Unita>{
         }
         Unita padre= unita.get(u.getPadre());
         if(!u.getSottoUnita().isEmpty()){
-            for(Unita i: u.getSottoUnita()){
+            for(String i: u.getSottoUnita()){
                 padre.addSottoUnita(i);
             }
         }

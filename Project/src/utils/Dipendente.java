@@ -26,4 +26,7 @@ public class Dipendente implements Serializable {
     public String toString(){
         return this.getNome()+" "+this.getCognome()+" "+this.getEmail();
     }
+    public Dipendente deepCopy() {
+        return new Dipendente(this.nome, this.cognome,this.email);
+    }
 }

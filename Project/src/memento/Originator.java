@@ -6,6 +6,7 @@ import utils.Ruolo;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Originator implements Serializable {
     private HashMap<String, Unita> unitaMap = new HashMap<>();
@@ -80,10 +81,9 @@ public class Originator implements Serializable {
 
     // Metodo per ripristinare lo stato da un Memento
     public void restore(Memento memento) {
-        if (!(memento instanceof OriginatorMemento)) {
+        if (!(memento instanceof OriginatorMemento originatorMemento)) {
             throw new IllegalArgumentException("Memento non valido.");
         }
-        OriginatorMemento originatorMemento = (OriginatorMemento) memento;
         this.unitaMap = new HashMap<>(originatorMemento.unitaMap);
         this.ruoloMap = new HashMap<>(originatorMemento.ruoloMap);
         this.dipendentiMap = new HashMap<>(originatorMemento.dipendentiMap);
@@ -99,10 +99,37 @@ public class Originator implements Serializable {
 
         // Salva lo stato dell'Originator
         private OriginatorMemento() {
-            this.unitaMap = new HashMap<>(Originator.this.unitaMap);
-            this.ruoloMap = new HashMap<>(Originator.this.ruoloMap);
-            this.dipendentiMap = new HashMap<>(Originator.this.dipendentiMap);
+            this.unitaMap = deepCopyUnitaMap(Originator.this.unitaMap);
+            this.ruoloMap = deepCopyRuoloMap(Originator.this.ruoloMap);
+            this.dipendentiMap = deepCopyDipendentiMap(Originator.this.dipendentiMap);
             this.radice = Originator.this.radice;
+        }
+
+        // Metodo per copiare profondamente la mappa di Unita
+        private HashMap<String, Unita> deepCopyUnitaMap(HashMap<String, Unita> original) {
+            HashMap<String, Unita> copy = new HashMap<>();
+            for (Map.Entry<String, Unita> entry : original.entrySet()) {
+                copy.put(entry.getKey(), entry.getValue().deepCopy()); // Assumi che Unita implementi clone()
+            }
+            return copy;
+        }
+
+        // Metodo per copiare profondamente la mappa di Ruolo
+        private HashMap<String, Ruolo> deepCopyRuoloMap(HashMap<String, Ruolo> original) {
+            HashMap<String, Ruolo> copy = new HashMap<>();
+            for (Map.Entry<String, Ruolo> entry : original.entrySet()) {
+                copy.put(entry.getKey(), entry.getValue().deepCopy()); // Assumi che Ruolo implementi clone()
+            }
+            return copy;
+        }
+
+        // Metodo per copiare profondamente la mappa di Dipendente
+        private HashMap<String, Dipendente> deepCopyDipendentiMap(HashMap<String, Dipendente> original) {
+            HashMap<String, Dipendente> copy = new HashMap<>();
+            for (Map.Entry<String, Dipendente> entry : original.entrySet()) {
+                copy.put(entry.getKey(), entry.getValue().deepCopy()); // Assumi che Dipendente implementi clone()
+            }
+            return copy;
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface Unita extends Serializable {
 
     String getNome();
-    List<Unita> getSottoUnita();
+    List<String> getSottoUnita();
     void setPadre(String u);
     String getPadre();
     void addRuolo(Ruolo r);
@@ -20,6 +20,7 @@ public interface Unita extends Serializable {
     void removeDipendente(Dipendente d, Ruolo r) ;
     HashMap<String,Dipendente> getDipendenti(Ruolo r);
     void copiaStato(Unita u);
-    void addSottoUnita(Unita u);
+    void addSottoUnita(String u);
     Ruolo getRuolo(String r);
+    UnitaComposite deepCopy();
 }
